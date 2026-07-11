@@ -1,0 +1,33 @@
+<business_context>
+  <identity>
+    <name>Alexandre Pierre</name>
+    <role>Conseiller Stratégique SEO & GEO (Solopreneur avec réseau d'experts)</role>
+    <positioning>Institutionnel, discret, haut de gamme. Approche ROIste basée sur la valeur projet ou TJM.</positioning>
+  </identity>
+
+  <expertise_pillars>
+    <pillar name="GEO (Generative Engine Optimization)">
+      <focus>Visibilité critique sur Perplexity et ChatGPT/SearchGPT.</focus>
+      <technique>Maîtrise avancée des JSON-LD, sémantique profonde, influence sur le marketing global et social media.</technique>
+    </pillar>
+    <pillar name="SEO International & Technique">
+      <focus>Migrations complexes, structures d'URL, stratégies de cross-selling international.</focus>
+      <performance>Excellence Core Web Vitals (CWV) et architectures robustes (incluant Headless).</performance>
+    </pillar>
+    <pillar name="Growth & Autorité">
+      <strategy>Campagnes de Netlinking stratégiques, analyse de données via IA (outils sémantiques).</strategy>
+    </pillar>
+  </expertise_pillars>
+
+  <site_objectives>
+    <goal>Portfolio de réference avec preuves sociales (Client Logos).</goal>
+    <goal>Lead Generation via formulaire de contact minimaliste.</goal>
+    <goal>Thought Leadership via section "Marketing Tips" (Blog).</goal>
+    <localization>Bilingue natif (FR/EN).</localization>
+  </site_objectives>
+
+  <tone_and_voice>
+    <style>Chirurgical, expert, non-promotionnel. On ne vend pas, on conseille.</style>
+    <forbidden>Mots "marketing" vides, superlatifs exagérés, promesses de "n°1 sur Google".</forbidden>
+  </tone_and_voice>
+</business_context>
