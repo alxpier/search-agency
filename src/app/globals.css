@@ -160,6 +160,12 @@ section {
   transform: scale(1.015);
 }
 
+/* --- PORTRAIT KOBI (fondu radial dans le fond noir) --- */
+.kobi-portrait {
+  -webkit-mask-image: radial-gradient(circle at center, black 58%, transparent 78%);
+  mask-image: radial-gradient(circle at center, black 58%, transparent 78%);
+}
+
 /* --- STRETCHED LINK --- */
 .anchor-stretch::after {
   content: "";
