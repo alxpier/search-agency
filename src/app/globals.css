@@ -195,10 +195,10 @@ section {
   background: conic-gradient(
     from var(--laser-pos),
     transparent 0deg,
-    rgba(0, 71, 255, 0.25) 15deg,
-    rgba(0, 242, 255, 0.75) 30deg,
-    rgba(16, 185, 129, 0.25) 45deg,
-    transparent 70deg,
+    rgba(0, 71, 255, 0.25) 40deg,
+    rgba(0, 242, 255, 0.75) 80deg,
+    rgba(16, 185, 129, 0.25) 120deg,
+    transparent 160deg,
     transparent 360deg
   ) !important;
 
