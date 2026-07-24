@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -14,7 +14,7 @@ export default function ContactPage() {
             <span className="text-zinc-600">Vision.</span>
           </h1>
           <p className="text-zinc-400 font-light max-w-sm leading-relaxed">
-            Vous avez l'ambition. J'ai l'architecture technique et sémantique pour la réaliser.
+            Vous avez l&apos;ambition. On a l&apos;architecture technique et sémantique pour la réaliser.
           </p>
         </div>
 
@@ -25,7 +25,7 @@ export default function ContactPage() {
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Email</p>
-              <p className="text-sm font-medium">hello@alexandrepierre.com</p>
+              <p className="text-sm font-medium">hello@kobiengine.fr</p>
             </div>
           </div>
           

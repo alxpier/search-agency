@@ -1,33 +1,43 @@
 <business_context>
   <identity>
-    <name>Alexandre Pierre</name>
-    <role>Conseiller Stratégique SEO & GEO (Solopreneur avec réseau d'experts)</role>
-    <positioning>Institutionnel, discret, haut de gamme. Approche ROIste basée sur la valeur projet ou TJM.</positioning>
+    <name>Kobi Engine</name>
+    <role>Agence spécialisée : sites sur-mesure + SEO/GEO pour métiers de niche (experts-comptables, architectes, vétérinaires)</role>
+    <positioning>Ce n'est plus un site perso (ex-Alexandre Pierre). Voix plurielle ("on"/"nous"), pas de storytelling de carrière personnelle. Expert, direct, orienté ROI pour des indépendants qui n'ont pas de temps à perdre avec le marketing.</positioning>
   </identity>
 
   <expertise_pillars>
+    <pillar name="SEO Technique">
+      <focus>Diagnostic, structure, Core Web Vitals, maillage interne, crawl budget.</focus>
+    </pillar>
     <pillar name="GEO (Generative Engine Optimization)">
-      <focus>Visibilité critique sur Perplexity et ChatGPT/SearchGPT.</focus>
-      <technique>Maîtrise avancée des JSON-LD, sémantique profonde, influence sur le marketing global et social media.</technique>
+      <focus>Visibilité dans ChatGPT, Perplexity, Gemini, AI Overviews. Élément différenciant de l'offre.</focus>
+      <technique>JSON-LD, sémantique profonde, données structurées.</technique>
     </pillar>
-    <pillar name="SEO International & Technique">
-      <focus>Migrations complexes, structures d'URL, stratégies de cross-selling international.</focus>
-      <performance>Excellence Core Web Vitals (CWV) et architectures robustes (incluant Headless).</performance>
-    </pillar>
-    <pillar name="Growth & Autorité">
-      <strategy>Campagnes de Netlinking stratégiques, analyse de données via IA (outils sémantiques).</strategy>
+    <pillar name="Création de sites">
+      <focus>Sites sur-mesure en architecture headless, pas de template générique (Simplébo, Bakipy...), performance native, SEO/GEO natif dès la conception.</focus>
     </pillar>
   </expertise_pillars>
 
+  <secteurs_cibles>
+    <secteur name="Experts-comptables" priorite="1" marche="21 611 cabinets, 210 rech/mois" angle="Votre site coûte 300€/an et ne rapporte rien" />
+    <secteur name="Architectes" priorite="2" marche="30 000 cabinets, 130 rech/mois" angle="Site beau mais invisible" />
+    <secteur name="Vétérinaires" priorite="3" marche="20 000 cliniques, 50 rech/mois" angle="Sortir du template générique (Bakipy/Simplébo)" />
+  </secteurs_cibles>
+
+  <offres future="B3.4">
+    <offre name="A — Site clé en main" prix="2 500-4 000€" />
+    <offre name="B — Refonte SEO/GEO" prix="1 500-3 000€" />
+    <offre name="C — Pack contenu" prix="1 000-1 800€" />
+  </offres>
+
   <site_objectives>
-    <goal>Portfolio de réference avec preuves sociales (Client Logos).</goal>
-    <goal>Lead Generation via formulaire de contact minimaliste.</goal>
-    <goal>Thought Leadership via section "Marketing Tips" (Blog).</goal>
-    <localization>Bilingue natif (FR/EN).</localization>
+    <goal>Lead Generation via formulaire de contact minimaliste, un CTA par page.</goal>
+    <goal>Études de cas : vide au lancement, à remplir dès le premier client (preuve sociale honnête, pas de logos fictifs).</goal>
+    <goal>Blog/Lab pour capter du trafic organique par niche.</goal>
   </site_objectives>
 
   <tone_and_voice>
-    <style>Chirurgical, expert, non-promotionnel. On ne vend pas, on conseille.</style>
-    <forbidden>Mots "marketing" vides, superlatifs exagérés, promesses de "n°1 sur Google".</forbidden>
+    <style>Chirurgical, expert, non-promotionnel. On ne vend pas, on conseille. Voix "on"/"nous", jamais "je" (ce n'est plus un site perso).</style>
+    <forbidden>Mots "marketing" vides, superlatifs exagérés, promesses de "n°1 sur Google", fausses références clients tant qu'il n'y a pas de vrais clients.</forbidden>
   </tone_and_voice>
 </business_context>

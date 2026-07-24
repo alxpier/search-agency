@@ -82,7 +82,7 @@ export default function ExpertiseHub() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <Cpu size={32} className="text-sw-yellow" />
-                  <span className="text-[10px] tracking-[0.4em] uppercase text-zinc-500 font-mono">02 — L'Innovation</span>
+                  <span className="text-[10px] tracking-[0.4em] uppercase text-zinc-500 font-mono">02 — L&apos;Innovation</span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">GEO / IA</h2>
                 <p className="text-zinc-400 max-w-xl font-light text-lg leading-relaxed">

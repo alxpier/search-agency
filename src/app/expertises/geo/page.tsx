@@ -41,7 +41,7 @@ export default function GeoPage() {
           <Target size={20} className="mb-6 opacity-40" />
           <h3 className="text-[11px] tracking-[0.2em] font-bold uppercase mb-4">Analyse de Citation</h3>
           <p className="text-xs text-zinc-500 leading-relaxed font-light">
-            Audit de votre visibilité actuelle dans les réponses génératives et identification des sources d'autorité.
+            Audit de votre visibilité actuelle dans les réponses génératives et identification des sources d&apos;autorité.
           </p>
         </div>
         <div className="p-12 border-b md:border-b-0 md:border-r border-white/10">

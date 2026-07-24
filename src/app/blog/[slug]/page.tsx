@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, ChevronLeft } from "lucide-react";
+import { Clock, Calendar, ChevronLeft } from "lucide-react";
 import { useParams } from "next/navigation";
 
 export default function ArticleTemplate() {
@@ -8,9 +8,9 @@ export default function ArticleTemplate() {
   const slug = params.slug;
 
   // On transforme le slug (ex: mon-article) en titre lisible (ex: Mon Article)
-  const displayTitle = typeof slug === 'string' 
-    ? slug.replace(/-/g, ' ').toUpperCase() 
-    : "Article du Lab";
+  const displayTitle = typeof slug === 'string'
+    ? slug.replace(/-/g, ' ').toUpperCase()
+    : "Article du Blog";
 
   return (
     <main className="bg-black text-white min-h-screen font-sans">
@@ -20,8 +20,8 @@ export default function ArticleTemplate() {
       </div>
 
       <article className="max-w-3xl mx-auto px-6 pt-40 pb-32">
-        <Link href="/lab" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white text-[10px] uppercase tracking-widest mb-16 transition-colors group">
-          <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Retour au Lab
+        <Link href="/blog" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white text-[10px] uppercase tracking-widest mb-16 transition-colors group">
+          <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Retour au Blog
         </Link>
 
         <header className="mb-20">
@@ -36,29 +36,29 @@ export default function ArticleTemplate() {
 
         <div className="space-y-8 text-zinc-400 text-lg font-light leading-relaxed">
           <p className="text-xl text-white font-normal italic">
-            Analyse approfondie des enjeux Search et GEO pour les marques internationales.
+            Analyse approfondie des enjeux Search et GEO pour les experts-comptables, architectes et vétérinaires.
           </p>
-          
-          <h2 className="text-2xl font-bold text-white uppercase tracking-tight pt-8">L'enjeu technique</h2>
+
+          <h2 className="text-2xl font-bold text-white uppercase tracking-tight pt-8">L&apos;enjeu technique</h2>
           <p>
-            Ceci est un template dynamique. En fonction de l'URL consultée dans le Lab, ce contenu s'adaptera. 
-            L'expertise acquise chez SQLI et Publicis me permet d'aborder ces sujets sous un angle à la fois technique (JS/SSR) et business.
+            Ceci est un template dynamique. En fonction de l&apos;URL consultée dans le Blog, ce contenu s&apos;adaptera.
+            Notre approche aborde ces sujets sous un angle à la fois technique (JS/SSR, headless) et métier.
           </p>
 
           <div className="border-l-2 border-white pl-8 py-4 my-12 bg-zinc-900/30">
-            <p className="text-white italic italic">
-              "L'optimisation pour les moteurs IA (GEO) demande une structure de données plus rigoureuse que le SEO classique."
+            <p className="text-white italic">
+              &laquo;&nbsp;L&apos;optimisation pour les moteurs IA (GEO) demande une structure de données plus rigoureuse que le SEO classique.&nbsp;&raquo;
             </p>
           </div>
 
           <p>
-            Le déploiement de stratégies sur plus de 30 sites à l'international a démontré que la cohérence de la donnée est la clé du succès, que ce soit pour Google ou pour les nouveaux agents conversationnels.
+            Un site sur-mesure, pensé pour votre secteur, a démontré que la cohérence de la donnée est la clé du succès, que ce soit pour Google ou pour les nouveaux agents conversationnels.
           </p>
         </div>
 
         <footer className="mt-24 pt-12 border-t border-white/10">
           <p className="text-zinc-500 text-sm">
-            Alexandre Pierre — Lead Search & GEO.
+            Kobi Engine — SEO & GEO pour experts indépendants.
           </p>
         </footer>
       </article>
