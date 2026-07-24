@@ -1,82 +1,73 @@
 "use client";
 import { ArrowRight, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
-    <main className="bg-black text-white min-h-screen w-full flex flex-col md:flex-row font-sans">
-      
-      {/* Colonne Gauche : Infos */}
-      <section className="w-full md:w-1/2 p-10 md:p-20 flex flex-col justify-between border-r border-white/10">
-        <div>
-          <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 mb-6 block">Démarrer un projet</span>
-          <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter leading-none mb-10">
-            Parlons<br />
-            <span className="text-zinc-600">Vision.</span>
+    <main className="bg-black text-white min-h-screen overflow-x-hidden selection:bg-yellow-500/30 relative">
+
+      {/* HERO */}
+      <section className="relative w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <span className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8 block">Démarrer un projet</span>
+          <h1
+            className="h1-tatooine mb-16 text-left"
+            data-text="Parlons vision"
+          >
+            Parlons vision
           </h1>
-          <p className="text-zinc-400 font-light max-w-sm leading-relaxed">
-            Vous avez l&apos;ambition. On a l&apos;architecture technique et sémantique pour la réaliser.
-          </p>
-        </div>
-
-        <div className="mt-20 space-y-8">
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <div className="p-3 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
-              <Mail size={16} />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Email</p>
-              <p className="text-sm font-medium">hello@kobiengine.fr</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <div className="p-3 border border-white/10 rounded-full group-hover:bg-white group-hover:text-black transition-all">
-              <MapPin size={16} />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Studio</p>
-              <p className="text-sm font-medium">Lyon, France</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Colonne Droite : Formulaire */}
-      <section className="w-full md:w-1/2 p-10 md:p-20 flex items-center justify-center bg-zinc-900/20">
-        <form className="w-full max-w-md space-y-8">
-          <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Identité</label>
-            <input 
-              type="text" 
-              placeholder="Votre nom ou société" 
-              className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white transition-colors placeholder:text-zinc-800"
-            />
+      {/* CONTACT */}
+      <section className="w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
+          <div>
+            <p className="text-zinc-400 text-lg font-light leading-relaxed mb-10 max-w-xl">
+              Vous avez l&apos;ambition. On a l&apos;architecture technique et sémantique pour la réaliser. Racontez-nous votre projet, son contexte et vos objectifs business.
+            </p>
+
+            <address className="not-italic space-y-5">
+              <Link href="mailto:hello@kobiengine.fr" className="sw-link text-lg md:text-xl font-semibold inline-flex items-center gap-3">
+                <Mail size={22} className="text-sw-yellow shrink-0" />
+                <span className="border-b border-white/10">hello@kobiengine.fr</span>
+              </Link>
+
+              <div className="flex items-center gap-3 text-zinc-500 text-xl">
+                <MapPin size={22} className="shrink-0" />
+                <span>Lyon, France</span>
+              </div>
+            </address>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Contact</label>
-            <input 
-              type="email" 
-              placeholder="votre@email.com" 
-              className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white transition-colors placeholder:text-zinc-800"
-            />
-          </div>
+          <div className="glow-item p-12 relative">
+            <form className="space-y-10">
+              <div>
+                <label className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-2 block">Identité</label>
+                <input type="text" placeholder="Votre nom ou société" className="w-full bg-transparent border-b border-white/10 py-4 text-xl focus:outline-none focus:border-sw-yellow transition-colors text-white" />
+              </div>
 
-          <div className="space-y-2">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Projet</label>
-            <textarea 
-              rows={4}
-              placeholder="Décrivez vos enjeux..." 
-              className="w-full bg-transparent border-b border-white/20 py-4 text-xl focus:outline-none focus:border-white transition-colors resize-none placeholder:text-zinc-800"
-            />
-          </div>
+              <div>
+                <label className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-2 block">Contact</label>
+                <input type="email" placeholder="votre@email.com" className="w-full bg-transparent border-b border-white/10 py-4 text-xl focus:outline-none focus:border-sw-yellow transition-colors text-white" />
+              </div>
 
-          <button className="group flex items-center gap-4 text-[10px] uppercase tracking-[0.3em] font-bold mt-10 hover:opacity-70 transition-opacity">
-            Envoyer la demande <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-          </button>
-        </form>
+              <div>
+                <label className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-2 block">Projet</label>
+                <textarea rows={3} placeholder="Décrivez vos enjeux..." className="w-full bg-transparent border-b border-white/10 py-4 text-xl focus:outline-none focus:border-sw-yellow transition-colors resize-none text-white" />
+              </div>
+
+              <button
+                type="submit"
+                className="sw-link text-lg md:text-2xl font-semibold inline-flex items-center gap-3 group/btn"
+              >
+                <span>Envoyer</span>
+                <ArrowRight size={28} className="shrink-0 transition-transform group-hover/btn:translate-x-2" />
+              </button>
+            </form>
+          </div>
+        </div>
       </section>
-
     </main>
   );
 }

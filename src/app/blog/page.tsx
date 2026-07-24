@@ -1,54 +1,76 @@
 "use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Beaker } from "lucide-react";
 
-// Ces slugs doivent correspondre à ce qui apparaîtra dans l'URL
 const articles = [
   {
-    slug: "geo-ia-architecture-headless",
     title: "L'ère du GEO : Pourquoi l'architecture Headless est votre meilleur atout",
     category: "R&D",
-    date: "12 Féb 2026"
+    date: "2026-02-12",
+    href: "/blog/geo-ia-architecture-headless",
   },
   {
-    slug: "site-generique-vs-sur-mesure",
     title: "Site générique (Simplébo, Bakipy) vs sur-mesure : ce que ça change pour votre visibilité",
     category: "Case Study",
-    date: "28 Jan 2026"
+    date: "2026-01-28",
+    href: "/blog/site-generique-vs-sur-mesure",
   }
 ];
 
 export default function BlogHub() {
+  useEffect(() => {
+    const handleScroll = () => {
+      const items = document.querySelectorAll(".glow-item");
+      const scrolled = window.scrollY;
+
+      items.forEach((item) => {
+        const rotation = scrolled * 0.15;
+        (item as HTMLElement).style.setProperty("--laser-pos", `${rotation}deg`);
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <main className="bg-black text-white min-h-screen p-10 md:p-24">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-            <Beaker className="text-zinc-600" size={20} />
-            <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 font-medium">Veille technologique</span>
+    <main className="bg-black text-white min-h-screen overflow-x-hidden selection:bg-yellow-500/30 relative">
+
+      {/* HERO */}
+      <section className="relative w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <span className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8 block">Veille technologique</span>
+          <h1
+            className="h1-tatooine mb-16 text-left"
+            data-text="Le Blog"
+          >
+            Le Blog
+          </h1>
         </div>
+      </section>
 
-        <h1 className="text-7xl md:text-9xl font-bold uppercase tracking-tighter mb-20">Le <span className="text-zinc-700 italic">Blog.</span></h1>
-
-        <div className="grid grid-cols-1 gap-12">
-          {articles.map((article) => (
-            <Link
-              key={article.slug}
-              href={`/blog/${article.slug}`}
-              className="group block border-b border-white/10 pb-12 hover:border-white transition-colors"
-            >
-              <div className="flex justify-between items-end">
+      {/* ARTICLES */}
+      <section className="w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <article key={article.href} className="glow-item group flex flex-col justify-between p-8 min-h-[280px] relative">
                 <div>
-                  <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mb-4">{article.category} — {article.date}</p>
-                  <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight group-hover:text-zinc-300 transition-colors">
-                    {article.title}
+                  <span className="text-xs uppercase text-sw-yellow font-bold tracking-[0.2em] mb-4 block">
+                    {article.category}
+                  </span>
+                  <h2 className="text-2xl font-semibold leading-tight tracking-tight">
+                    <Link href={article.href} className="anchor-stretch">{article.title}</Link>
                   </h2>
                 </div>
-                <ArrowRight className="text-zinc-800 group-hover:text-white transition-all group-hover:translate-x-2" size={32} />
-              </div>
-            </Link>
-          ))}
+                <time dateTime={article.date} className="text-zinc-600 text-sm font-medium">{article.date}</time>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

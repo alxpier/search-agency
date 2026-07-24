@@ -1,62 +1,59 @@
-"use client";
-import { motion } from "framer-motion";
-import { ArrowLeft, Target, Zap, Search } from "lucide-react";
+import { Target, Zap, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function GeoPage() {
   return (
-    <main className="bg-black text-white min-h-screen w-full flex flex-col font-sans">
-      {/* Navigation */}
-      <header className="px-10 pt-8 flex justify-between items-center">
-        <Link href="/expertises" className="group flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">
-          <ArrowLeft size={14} /> Retour
-        </Link>
-        <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Expertise / GEO</span>
-      </header>
+    <main className="bg-black text-white min-h-screen overflow-x-hidden selection:bg-yellow-500/30 relative">
 
-      {/* Hero Section */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-20">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-6 px-3 py-1 border border-white/10 rounded-full text-[10px] tracking-[0.3em] uppercase text-zinc-500"
-        >
-          Generative Engine Optimization
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-center bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-500"
-        >
-          Dominer les IA
-        </motion.h1>
-        <p className="mt-8 max-w-2xl text-zinc-400 font-light tracking-wide text-center leading-relaxed">
-          Le SEO classique ne suffit plus. Vos clients posent des questions à ChatGPT, Perplexity et Gemini. On configure votre empreinte numérique pour que ces moteurs vous citent comme la référence absolue.
-        </p>
+      {/* HERO */}
+      <section className="relative w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <span className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8 block">Expertise / GEO</span>
+          <h1
+            className="h1-tatooine mb-16 text-left"
+            data-text="Dominer les IA"
+          >
+            Dominer les IA
+          </h1>
+
+          <div className="max-w-3xl text-zinc-300 text-base md:text-xl leading-relaxed font-light space-y-8 mb-4">
+            <p>
+              Le SEO classique ne suffit plus. Vos clients posent des questions à ChatGPT, Perplexity et Gemini. On configure votre empreinte numérique pour que ces moteurs vous citent comme la référence absolue.
+            </p>
+          </div>
+
+          <Link href="/contact" className="sw-link text-xl md:text-2xl font-semibold tracking-wide">
+            Discuter de votre projet &rarr;
+          </Link>
+        </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 w-full border-t border-white/10">
-        <div className="p-12 border-b md:border-b-0 md:border-r border-white/10">
-          <Target size={20} className="mb-6 opacity-40" />
-          <h3 className="text-[11px] tracking-[0.2em] font-bold uppercase mb-4">Analyse de Citation</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed font-light">
-            Audit de votre visibilité actuelle dans les réponses génératives et identification des sources d&apos;autorité.
-          </p>
-        </div>
-        <div className="p-12 border-b md:border-b-0 md:border-r border-white/10">
-          <Zap size={20} className="mb-6 opacity-40" />
-          <h3 className="text-[11px] tracking-[0.2em] font-bold uppercase mb-4">Optimisation LLM</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed font-light">
-            Structuration de vos données pour maximiser la compréhension par les modèles de langage (LLM).
-          </p>
-        </div>
-        <div className="p-12">
-          <Search size={20} className="mb-6 opacity-40" />
-          <h3 className="text-[11px] tracking-[0.2em] font-bold uppercase mb-4">Veille Algorithmique</h3>
-          <p className="text-xs text-zinc-500 leading-relaxed font-light">
-            Suivi des mises à jour de Perplexity et OpenAI pour maintenir votre position de leader.
-          </p>
+      {/* FEATURES */}
+      <section className="w-full px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <article className="glow-item p-10 flex flex-col gap-6 group relative">
+              <Target className="group-hover:text-sw-yellow transition-colors" size={32} />
+              <h3 className="text-2xl font-semibold tracking-tight">Analyse de citation</h3>
+              <p className="text-zinc-400 font-light leading-relaxed">
+                Audit de votre visibilité actuelle dans les réponses génératives et identification des sources d&apos;autorité.
+              </p>
+            </article>
+            <article className="glow-item p-10 flex flex-col gap-6 group relative">
+              <Zap className="group-hover:text-sw-yellow transition-colors" size={32} />
+              <h3 className="text-2xl font-semibold tracking-tight">Optimisation LLM</h3>
+              <p className="text-zinc-400 font-light leading-relaxed">
+                Structuration de vos données pour maximiser la compréhension par les modèles de langage (LLM).
+              </p>
+            </article>
+            <article className="glow-item p-10 flex flex-col gap-6 group relative">
+              <Search className="group-hover:text-sw-yellow transition-colors" size={32} />
+              <h3 className="text-2xl font-semibold tracking-tight">Veille algorithmique</h3>
+              <p className="text-zinc-400 font-light leading-relaxed">
+                Suivi des mises à jour de Perplexity et OpenAI pour maintenir votre position de leader.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
     </main>
