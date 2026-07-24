@@ -6,25 +6,25 @@ import { ChevronDown, Menu, X } from "lucide-react";
 const menuItems = [
   {
     title: "Expertises",
-    href: "/expertise",
+    href: "/expertises",
     submenu: [
-      { title: "GEO & IA", href: "/expertise/geo" },
-      { title: "SEO Technique", href: "/expertise/technique" },
-      { title: "International", href: "/expertise/international" },
-      { title: "SEO Local", href: "/expertise/local" },
+      { title: "SEO Technique", href: "/expertises/seo" },
+      { title: "GEO / IA", href: "/expertises/geo" },
+      { title: "Création de sites", href: "/expertises/sites-web" },
     ],
   },
   {
-    title: "Solutions",
-    href: "/solutions",
+    title: "Secteurs",
+    href: "/secteurs",
     submenu: [
-      { title: "Accompagnement", href: "/solutions/accompagnement" },
-      { title: "Formation SEO", href: "/solutions/formation" },
+      { title: "Experts-comptables", href: "/secteurs/expert-comptable" },
+      { title: "Architectes", href: "/secteurs/architecte" },
+      { title: "Vétérinaires", href: "/secteurs/veterinaire" },
     ],
   },
-  { title: "Simulateur", href: "/simulateur" },
-  { title: "Parcours", href: "/parcours" },
-  { title: "Le Lab", href: "/lab" },
+  { title: "Méthode", href: "/methode" },
+  { title: "Études de cas", href: "/cas" },
+  { title: "Blog", href: "/blog" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -43,7 +43,7 @@ export default function Navigation() {
     <>
       <nav className="fixed top-0 w-full z-50 px-10 py-6 flex justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5">
         <Link href="/" className="text-[10px] tracking-[0.2em] uppercase font-bold">
-          Alexandre Pierre
+          Kobi Engine
         </Link>
 
         {/* Desktop nav */}

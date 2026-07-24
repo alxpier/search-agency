@@ -1,37 +1,43 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Globe, Cpu, MapPin, Calculator, Mail } from "lucide-react";
+import { ArrowRight, Globe, Cpu, Layers, Mail, MapPin } from "lucide-react";
 
 const labArticles = [
   {
     title: "Structurer son site pour le GEO : bonnes pratiques et pièges à éviter",
     category: "GEO",
     date: "2024-05-20",
-    href: "/lab/structurer-site-geo",
+    href: "/blog/structurer-site-geo",
   },
   {
     title: "Mesurer l’impact SEO avec la Data : du crawl au dashboard",
     category: "Data",
     date: "2024-04-18",
-    href: "/lab/mesurer-impact-seo-data",
+    href: "/blog/mesurer-impact-seo-data",
   },
   {
     title: "Optimisation technique avancée : indexabilité et budget crawl",
     category: "Technique",
     date: "2024-03-27",
-    href: "/lab/optimisation-technique-indexabilite",
+    href: "/blog/optimisation-technique-indexabilite",
   },
 ];
 
+const secteurs = [
+  { title: "Experts-comptables", desc: "Votre site coûte 300€/an et ne rapporte rien. On change ça.", href: "/secteurs/expert-comptable" },
+  { title: "Architectes", desc: "Un site beau mais invisible n'amène aucun client.", href: "/secteurs/architecte" },
+  { title: "Vétérinaires", desc: "Sortir du template générique et enfin être trouvé.", href: "/secteurs/veterinaire" },
+];
+
 const faqData = [
-  { q: "Quelles sont les missions d'un consultant SEO & GEO ?", r: "Un consultant SEO analyse la structure technique, la sémantique et l'autorité d'un site. En 2026, j'intègre le GEO (Generative Engine Optimization) pour garantir que votre marque ne soit pas seulement indexée par Google, mais aussi citée comme référence par les IA (Perplexity, Gemini, ou SGE)." },
-  { q: "Quel est le coût d'une prestation de conseil en référencement ?", r: "Le tarif varie selon la complexité technique et les objectifs de croissance. Mon approche repose sur le ROI : chaque euro investi doit servir un levier de conversion mesurable." },
-  { q: "Le SEO sera-t-il remplacé par l'IA (SGE, Perplexity) ?", r: "Le SEO ne meurt pas, il mute. L'IA remplace la recherche de 'mots-clés' par la recherche d'intentions. Le GEO devient donc indispensable." },
-  { q: "Quels sont les 4 piliers du SEO en 2026 ?", r: "Aux trois piliers historiques (Technique, Contenu, Netlinking), s'ajoute désormais la Sémantique Générative (Données structurées JSON-LD avancées)." },
-  { q: "Est-ce que le SEO est une compétence informatique (IT) ?", r: "C'est une discipline hybride. Si la stratégie est marketing, l'exécution est hautement technique. Ma double expertise permet de dialoguer directement avec vos développeurs." },
-  { q: "La règle du 80/20 s'applique-t-elle au Search Marketing ?", r: "Absolument. 80% de vos résultats proviennent souvent de 20% de vos pages stratégiques. Mon rôle est d'identifier ces actifs à fort potentiel." },
-  { q: "Peut-on encore obtenir des résultats SEO en 2026 ?", r: "Oui, mais plus avec les méthodes de 2020. Le succès demande une approche 'Multi-Search' : dominer les SERP classiques, Maps et les moteurs de réponse." }
+  { q: "Quelles sont les missions de Kobi Engine ?", r: "Kobi Engine analyse la structure technique, la sémantique et l'autorité de votre site, puis conçoit ou refond une présence taillée pour votre métier. En 2026, on intègre le GEO (Generative Engine Optimization) pour garantir que votre cabinet ne soit pas seulement indexé par Google, mais aussi cité comme référence par les IA (Perplexity, Gemini, ou AI Overviews)." },
+  { q: "Quel est le coût d'un site ou d'une refonte SEO/GEO ?", r: "Le tarif varie selon le périmètre : un site clé en main démarre autour de 2 500€, une refonte SEO/GEO autour de 1 500€. Notre approche repose sur le ROI : chaque euro investi doit servir un levier de conversion mesurable pour votre cabinet." },
+  { q: "Le SEO sera-t-il remplacé par l'IA (SGE, Perplexity) ?", r: "Le SEO ne meurt pas, il mute. L'IA remplace la recherche de 'mots-clés' par la recherche d'intentions. Le GEO devient donc indispensable, y compris pour les métiers de proximité." },
+  { q: "Pourquoi un site générique (Simplébo, Bakipy...) ne suffit pas ?", r: "Ces solutions produisent des sites qui se ressemblent tous, avec une structure technique et sémantique identique pour chaque client. Un site sur-mesure permet de se différencier et d'être réellement compris par Google comme par les IA." },
+  { q: "Est-ce que le SEO est une compétence informatique (IT) ?", r: "C'est une discipline hybride. Si la stratégie est marketing, l'exécution est hautement technique (architecture headless, Core Web Vitals, données structurées). C'est ce double regard qui fait la différence." },
+  { q: "Combien de temps avant de voir des résultats ?", r: "Un site bien structuré est indexé en quelques jours. Les premiers effets sur le trafic qualifié se voient généralement entre 2 et 4 mois, selon la concurrence de votre secteur et zone géographique." },
+  { q: "Travaillez-vous avec tous les secteurs d'activité ?", r: "Nous nous concentrons volontairement sur quelques niches (experts-comptables, architectes, vétérinaires) pour maîtriser leur vocabulaire métier et leurs problématiques spécifiques plutôt que de rester généralistes." }
 ];
 
 export default function HomePage() {
@@ -77,25 +83,25 @@ export default function HomePage() {
         <div className="max-full mx-auto">
           <h1
             className="h1-tatooine mb-16 text-left"
-            data-text="Consultant SEO/GEO à Lyon"
+            data-text="Le site qui vous amène des clients"
           >
-            Consultant SEO/GEO à Lyon
+            Le site qui vous amène des clients
           </h1>
 
           <div className="max-full text-zinc-300 text-base md:text-xl leading-relaxed font-light space-y-8 mb-12">
             <p>
-              En tant que Lead Search chez SQLI et Publicis Sapient, j’ai assuré la gestion de comptes internationaux confrontés à des enjeux de scalabilité technique : migrations multi-pays, architectures headless et pilotage de multiples environnements. À chaque étape, l’objectif restait le même : aligner les recommandations SEO sur le ROI attendu et offrir à la direction des livrables lisibles, cohérents et directement exploitables.
+              Kobi Engine conçoit des sites sur-mesure pour les experts-comptables, architectes et vétérinaires : pas de template générique, pas de structure interchangeable. Chaque site est pensé pour votre métier, votre vocabulaire et vos clients.
             </p>
             <p>
-              En 2026, le SEO opère une mutation stratégique et devient le <span className="text-white font-medium">GEO (Generative Engine Optimization)</span>. L’enjeu n’est plus d’occupper une place dans les résultats Google, mais de devenir une source de référence citée par les moteurs d’IA tels que Perplexity, Gemini, ou SGE.
+              En 2026, le SEO opère une mutation stratégique et devient le <span className="text-white font-medium">GEO (Generative Engine Optimization)</span>. L’enjeu n’est plus d’occuper une place dans les résultats Google, mais de devenir une source de référence citée par les moteurs d’IA tels que Perplexity, Gemini, ou les AI Overviews.
             </p>
             <p>
-              À Lyon et à distance, j’œuvre pour faire du Search/GEO un actif stratégique, pilotable et documenté par vos équipes.
+              À Lyon et à distance, on fait du Search/GEO un actif stratégique, pilotable et documenté, pour des cabinets qui n&apos;ont pas de temps à perdre avec le marketing.
             </p>
           </div>
 
-          <Link href="/parcours" className="sw-link text-xl md:text-2xl font-semibold tracking-wide">
-            Consulter mon parcours détaillé &rarr;
+          <Link href="/methode" className="sw-link text-xl md:text-2xl font-semibold tracking-wide">
+            Découvrir notre méthode &rarr;
           </Link>
         </div>
       </section>
@@ -105,72 +111,69 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto">
           <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-20">Expertises Stratégiques</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <article className="glow-item p-12 flex flex-col gap-8 group relative">
               <Globe className="group-hover:text-sw-yellow transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
-                <Link href="/expertise/technique" className="anchor-stretch">SEO Technique</Link>
+                <Link href="/expertises/seo" className="anchor-stretch">SEO Technique</Link>
               </h3>
               <p className="text-zinc-400 text-lg font-light leading-relaxed">
-                Diagnostic, stratégie éditoriale et optimisation des parcours : chaque action vise un levier mesurable.
-              </p>
-            </article>
-
-            <article className="glow-item p-12 flex flex-col gap-8 group relative">
-              <MapPin className="group-hover:text-sw-yellow transition-colors" size={40} />
-              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
-                <Link href="/expertise/local" className="anchor-stretch">SEO Local</Link>
-              </h3>
-              <p className="text-zinc-400 text-lg font-light leading-relaxed">
-                Optimisation des fiches établissement et maillage territorial pour maximiser la pertinence Maps.
-              </p>
-            </article>
-
-            <article className="glow-item p-12 flex flex-col gap-8 group relative">
-              <ArrowRight className="group-hover:text-sw-yellow transition-colors" size={40} />
-              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
-                <Link href="/expertise/international" className="anchor-stretch">SEO International</Link>
-              </h3>
-              <p className="text-zinc-400 text-lg font-light leading-relaxed">
-                Gestion des migrations, structures hreflang et stratégies multi-marchés.
+                Diagnostic, structure et optimisation des parcours : chaque action vise un levier mesurable.
               </p>
             </article>
 
             <article className="glow-item p-12 flex flex-col gap-8 group relative">
               <Cpu className="group-hover:text-sw-yellow transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
-                <Link href="/expertise/geo" className="anchor-stretch">GEO / IA</Link>
+                <Link href="/expertises/geo" className="anchor-stretch">GEO / IA</Link>
               </h3>
               <p className="text-zinc-400 text-lg font-light leading-relaxed">
                 Alignement sémantique et technique pour devenir une source sélectionnée par les IA.
+              </p>
+            </article>
+
+            <article className="glow-item p-12 flex flex-col gap-8 group relative">
+              <Layers className="group-hover:text-sw-yellow transition-colors" size={40} />
+              <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
+                <Link href="/expertises/sites-web" className="anchor-stretch">Création de sites</Link>
+              </h3>
+              <p className="text-zinc-400 text-lg font-light leading-relaxed">
+                Sites sur mesure, pas de template, performance native dès la conception.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      {/* SIMULATEUR */}
+      {/* SECTEURS */}
       <section className="w-full px-6 md:px-16 bg-zinc-950/40">
-        <div className="max-w-[1100px] mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-12">
-            Simuler votre potentiel
-          </h2>
-          <p className="text-zinc-400 text-lg md:text-xl font-light mb-12">
-            Anticipez le ROI réel de votre future visibilité organique.
+        <div className="max-w-[1400px] mx-auto">
+          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">Secteurs</h2>
+          <p className="text-zinc-400 text-lg md:text-xl font-light mb-16 max-w-2xl">
+            On se concentre sur quelques métiers pour maîtriser leur vocabulaire et leurs problématiques.
           </p>
-          <Link
-            href="/simulateur"
-            className="px-12 py-6 bg-white text-black font-semibold tracking-wide text-xs hover:bg-sw-yellow transition-all rounded-sm flex items-center gap-4 justify-center"
-          >
-            Lancer le simulateur <Calculator size={18} />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+            {secteurs.map((s) => (
+              <article key={s.href} className="glow-item p-10 flex flex-col gap-6 group relative">
+                <h3 className="text-2xl font-semibold tracking-tight">
+                  <Link href={s.href} className="anchor-stretch">{s.title}</Link>
+                </h3>
+                <p className="text-zinc-400 font-light leading-relaxed">{s.desc}</p>
+              </article>
+            ))}
+          </div>
+
+          <Link href="/secteurs" className="sw-link text-lg md:text-2xl font-semibold tracking-wide">
+            Voir tous les secteurs &rarr;
           </Link>
         </div>
       </section>
 
-      {/* LAB */}
+      {/* BLOG / LAB */}
       <section className="w-full px-6 md:px-16">
         <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Le Lab</h2>
+          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Blog / Lab</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {labArticles.map((article) => (
@@ -189,7 +192,7 @@ export default function HomePage() {
           </div>
 
           <Link href="/lab" className="sw-link text-lg md:text-2xl font-semibold tracking-wide">
-            Explorer l'intégralité du Lab &rarr;
+            Explorer le blog &rarr;
           </Link>
         </div>
       </section>
@@ -203,13 +206,13 @@ export default function HomePage() {
               On travaille ensemble ?
             </h2>
             <p className="text-zinc-400 text-lg font-light mb-10 max-w-xl">
-              Racontez-moi votre projet, son contexte et vos objectifs business.
+              Racontez-nous votre projet, son contexte et vos objectifs business.
             </p>
 
             <address className="not-italic space-y-5">
-              <Link href="mailto:hello@alexandrepierre.com" className="sw-link text-lg md:text-xl font-semibold inline-flex items-center gap-3">
+              <Link href="mailto:hello@kobiengine.fr" className="sw-link text-lg md:text-xl font-semibold inline-flex items-center gap-3">
                 <Mail size={22} className="text-sw-yellow shrink-0" />
-                <span className="border-b border-white/10">hello@alexandrepierre.com</span>
+                <span className="border-b border-white/10">hello@kobiengine.fr</span>
               </Link>
 
               <div className="flex items-center gap-3 text-zinc-500 text-xl">

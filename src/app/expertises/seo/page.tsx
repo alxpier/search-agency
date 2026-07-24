@@ -1,14 +1,14 @@
 import { ArrowLeft, Cpu, Code, Zap } from "lucide-react";
 import Link from "next/link";
 
-export default function TechniquePage() {
+export default function SeoPage() {
   return (
     <main className="bg-black text-white min-h-screen w-full flex flex-col font-sans">
       <header className="px-10 pt-8 flex justify-between items-center">
-        <Link href="/" className="group flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">
+        <Link href="/expertises" className="group flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">
           <ArrowLeft size={14} /> Retour
         </Link>
-        <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Expertise / Technique</span>
+        <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Expertise / SEO Technique</span>
       </header>
 
       <section className="flex-1 flex flex-col items-center justify-center px-4 py-20">
@@ -19,7 +19,7 @@ export default function TechniquePage() {
           Infrastructure de Haute Précision
         </h1>
         <p className="mt-8 max-w-2xl text-zinc-400 font-light tracking-wide text-center leading-relaxed">
-          Un design digne de ce nom doit reposer sur un code irréprochable. J’optimise vos Core Web Vitals et votre structure technique pour une indexation instantanée.
+          Un site digne de ce nom doit reposer sur un code irréprochable. On optimise vos Core Web Vitals et votre structure technique pour une indexation instantanée.
         </p>
       </section>
 

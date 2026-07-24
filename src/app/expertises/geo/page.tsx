@@ -8,7 +8,7 @@ export default function GeoPage() {
     <main className="bg-black text-white min-h-screen w-full flex flex-col font-sans">
       {/* Navigation */}
       <header className="px-10 pt-8 flex justify-between items-center">
-        <Link href="/" className="group flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">
+        <Link href="/expertises" className="group flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">
           <ArrowLeft size={14} /> Retour
         </Link>
         <span className="text-[10px] tracking-[0.2em] uppercase opacity-40">Expertise / GEO</span>
@@ -16,14 +16,14 @@ export default function GeoPage() {
 
       {/* Hero Section */}
       <section className="flex-1 flex flex-col items-center justify-center px-4 py-20">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="mb-6 px-3 py-1 border border-white/10 rounded-full text-[10px] tracking-[0.3em] uppercase text-zinc-500"
         >
           Generative Engine Optimization
         </motion.div>
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-center bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-500"
@@ -31,7 +31,7 @@ export default function GeoPage() {
           Dominer les IA
         </motion.h1>
         <p className="mt-8 max-w-2xl text-zinc-400 font-light tracking-wide text-center leading-relaxed">
-          Le SEO classique ne suffit plus. Vos clients posent des questions à ChatGPT, Perplexity et Gemini. Je configure votre empreinte numérique pour que ces moteurs vous citent comme la référence absolue.
+          Le SEO classique ne suffit plus. Vos clients posent des questions à ChatGPT, Perplexity et Gemini. On configure votre empreinte numérique pour que ces moteurs vous citent comme la référence absolue.
         </p>
       </section>
 
