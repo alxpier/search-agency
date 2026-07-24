@@ -121,7 +121,18 @@ function StatCounter({ value, prefix = "", suffix = "", label }: { value: number
   );
 }
 
+function SectionHeading({ eyebrow, intro }: { eyebrow: string; intro?: string }) {
+  return (
+    <div className="mb-16">
+      <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">{eyebrow}</h2>
+      {intro && <p className="text-zinc-400 text-lg md:text-xl font-light max-w-2xl">{intro}</p>}
+    </div>
+  );
+}
+
 export default function HomePage() {
+  const kobiRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleScroll = () => {
       const items = document.querySelectorAll(".glow-item");
@@ -134,11 +145,33 @@ export default function HomePage() {
         const rotation = scrolled * 0.15;
         (item as HTMLElement).style.setProperty("--laser-pos", `${rotation}deg`);
       });
+
+      if (kobiRef.current) {
+        const parallax = Math.min(scrolled * 0.08, 60);
+        kobiRef.current.style.transform = `translateY(${parallax}px)`;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   const faqSchema = {
@@ -160,8 +193,13 @@ export default function HomePage() {
       />
 
       {/* HERO */}
-      <section className="relative w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
+      <section className="relative w-full px-6 md:px-16 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 60% at 78% 35%, rgba(255,232,31,0.07), transparent 65%)" }}
+        />
+
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center relative">
           <div>
             <h1
               className="h1-tatooine mb-16 text-left"
@@ -187,8 +225,13 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="absolute inset-0 m-auto w-[280px] h-[280px] md:w-[360px] md:h-[360px] bg-sw-yellow/10 blur-[110px] rounded-full" />
+          <div ref={kobiRef} className="relative flex justify-center lg:justify-end">
+            <div className="star-field inset-[-40px] w-[calc(100%+80px)] h-[calc(100%+80px)]" />
+            <div className="kobi-halo w-[260px] h-[260px] md:w-[340px] md:h-[340px] bg-sw-yellow/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <div
+              className="kobi-halo w-[180px] h-[220px] md:w-[240px] md:h-[280px] bg-[#c5a059]/15 top-[35%] left-[60%] -translate-x-1/2 -translate-y-1/2"
+              style={{ animationDelay: "-3s" }}
+            />
             <Image
               src="/kobi-hero.png"
               alt="Kobi, la mascotte de Kobi Engine"
@@ -202,36 +245,41 @@ export default function HomePage() {
       </section>
 
       {/* LE CONSTAT */}
-      <section className="w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">Le constat</h2>
-          <p className="text-zinc-400 text-lg md:text-xl font-light mb-16 max-w-2xl">
-            Trois raisons pour lesquelles la majorité des sites de professionnels ne rapportent rien en 2026.
-          </p>
+      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950 via-zinc-900/50 to-black">
+        <div className="reveal max-w-[1400px] mx-auto">
+          <SectionHeading eyebrow="Le constat" intro="Trois raisons pour lesquelles la majorité des sites de professionnels ne rapportent rien en 2026." />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {constat.map(({ icon: Icon, title, desc }, i) => (
-              <article key={title} className="glow-item p-12 flex flex-col gap-6 group relative">
-                <div className="flex items-center justify-between">
-                  <span className="text-4xl font-semibold tracking-tight text-zinc-700 group-hover:text-sw-yellow transition-colors">0{i + 1}</span>
-                  <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
-                </div>
-                <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
-                <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
-              </article>
-            ))}
+          <div className="relative">
+            <div className="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/10 to-white/0" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {constat.map(({ icon: Icon, title, desc }, i) => (
+                <article
+                  key={title}
+                  className={`glow-item p-12 flex flex-col gap-6 group relative overflow-hidden ${i === 1 ? "md:translate-y-10" : ""}`}
+                >
+                  <span className="absolute top-1 left-4 text-8xl font-bold text-white/[0.06] select-none pointer-events-none leading-none">
+                    0{i + 1}
+                  </span>
+                  <div className="relative z-10 flex flex-col gap-6">
+                    <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
+                    <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
+                    <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* EXPERTISES */}
       <section className="w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-20">Expertises Stratégiques</h2>
+        <div className="reveal max-w-[1400px] mx-auto">
+          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-20">Expertises Stratégiques</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <article className="glow-item p-12 flex flex-col gap-8 group relative">
-              <Globe className="group-hover:text-sw-yellow transition-colors" size={40} />
+            <article className="glow-item glow-seo p-12 flex flex-col gap-8 group relative">
+              <Globe className="group-hover:text-emerald-400 transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/seo" className="anchor-stretch">SEO Technique</Link>
               </h3>
@@ -240,8 +288,8 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item p-12 flex flex-col gap-8 group relative">
-              <Cpu className="group-hover:text-sw-yellow transition-colors" size={40} />
+            <article className="glow-item glow-geo p-12 flex flex-col gap-8 group relative">
+              <Cpu className="group-hover:text-blue-400 transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/geo" className="anchor-stretch">GEO / IA</Link>
               </h3>
@@ -250,8 +298,8 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item p-12 flex flex-col gap-8 group relative">
-              <Layers className="group-hover:text-sw-yellow transition-colors" size={40} />
+            <article className="glow-item glow-sites p-12 flex flex-col gap-8 group relative">
+              <Layers className="group-hover:text-orange-400 transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/sites-web" className="anchor-stretch">Création de sites</Link>
               </h3>
@@ -264,9 +312,9 @@ export default function HomePage() {
       </section>
 
       {/* CHIFFRES CLÉS */}
-      <section className="w-full px-6 md:px-16 bg-zinc-950/40">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
+      <section className="w-full px-6 md:px-16 bg-gradient-to-r from-zinc-950/30 via-zinc-900/50 to-zinc-950/30">
+        <div className="reveal max-w-[1400px] mx-auto">
+          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {stats.map((s) => (
               <StatCounter key={s.label} {...s} />
@@ -277,20 +325,17 @@ export default function HomePage() {
 
       {/* SECTEURS */}
       <section className="w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">Secteurs</h2>
-          <p className="text-zinc-400 text-lg md:text-xl font-light mb-16 max-w-2xl">
-            On accompagne les professionnels qui méritent mieux qu&apos;un template.
-          </p>
+        <div className="reveal max-w-[1400px] mx-auto">
+          <SectionHeading eyebrow="Secteurs" intro="On accompagne les professionnels qui méritent mieux qu'un template." />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
             {secteursPrio.map(({ icon: Icon, title, desc, href }) => (
-              <article key={href} className="glow-item p-10 flex flex-col gap-6 group relative">
-                <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
-                <h3 className="text-2xl font-semibold tracking-tight">
+              <article key={href} className="glow-item p-12 flex flex-col gap-6 group relative">
+                <Icon className="group-hover:text-sw-yellow transition-colors" size={36} />
+                <h3 className="text-3xl font-semibold tracking-tight">
                   <Link href={href} className="anchor-stretch">{title}</Link>
                 </h3>
-                <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+                <p className="text-zinc-400 text-lg font-light leading-relaxed">{desc}</p>
               </article>
             ))}
           </div>
@@ -315,22 +360,35 @@ export default function HomePage() {
       </section>
 
       {/* NOTRE MÉTHODE */}
-      <section className="w-full px-6 md:px-16 bg-zinc-950/40">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">Notre méthode</h2>
-          <p className="text-zinc-400 text-lg md:text-xl font-light mb-16 max-w-2xl">
-            Un process en 3 étapes, sans surprise et sans jargon inutile.
-          </p>
+      <section className="w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950/70 to-black">
+        <div className="reveal max-w-[1400px] mx-auto">
+          <SectionHeading eyebrow="Notre méthode" intro="Un process en 3 étapes, sans surprise et sans jargon inutile." />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
-            {methode.map(({ icon: Icon, title, desc }, i) => (
-              <article key={title} className="glow-item p-12 flex flex-col gap-8 group relative">
-                <div className="flex items-center justify-between">
-                  <span className="text-4xl font-semibold tracking-tight text-zinc-700 group-hover:text-sw-yellow transition-colors">0{i + 1}</span>
-                  <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
+          {/* Connecteur pipeline (desktop) */}
+          <div className="hidden md:flex items-center justify-center mb-4">
+            {methode.map((_, i) => (
+              <React.Fragment key={i}>
+                <div className="w-9 h-9 rounded-full border border-white/15 bg-black flex items-center justify-center text-xs font-bold text-zinc-400 shrink-0">
+                  {i + 1}
                 </div>
-                <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
-                <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+                {i < methode.length - 1 && (
+                  <div className="flex-1 max-w-[140px] h-px mx-2 bg-gradient-to-r from-white/15 via-white/25 to-white/15" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16 mt-10 md:mt-16">
+            {methode.map(({ icon: Icon, title, desc }, i) => (
+              <article key={title} className="glow-item p-12 flex flex-col gap-6 group relative overflow-hidden">
+                <span className="absolute top-1 left-4 text-8xl font-bold text-white/[0.06] select-none pointer-events-none leading-none">
+                  0{i + 1}
+                </span>
+                <div className="relative z-10 flex flex-col gap-6">
+                  <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
+                  <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
+                  <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -343,8 +401,8 @@ export default function HomePage() {
 
       {/* BLOG / LAB */}
       <section className="w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Blog / Lab</h2>
+        <div className="reveal max-w-[1400px] mx-auto">
+          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Blog / Lab</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {labArticles.map((article) => (
@@ -369,8 +427,12 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section className="w-full px-6 md:px-16 border-t border-white/5">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
+      <section className="relative w-full px-6 md:px-16 border-t border-white/5 bg-gradient-to-b from-black to-zinc-900 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 60% 50% at 20% 100%, rgba(197,160,89,0.08), transparent 70%)" }}
+        />
+        <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 relative">
           <div>
             <span className="text-xs tracking-[0.4em] uppercase text-zinc-600 mb-8 block">Démarrer un projet</span>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-none mb-12">
@@ -418,10 +480,10 @@ export default function HomePage() {
       </section>
 
       {/* PREUVE SOCIALE */}
-      <section className="w-full px-6 md:px-16">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Réalisations</h2>
-          <div className="glow-item p-16 md:p-24 flex flex-col items-start gap-6">
+      <section className="w-full px-6 md:px-16 bg-black">
+        <div className="reveal max-w-[1400px] mx-auto">
+          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Réalisations</h2>
+          <div className="pattern-dots glow-item p-16 md:p-24 flex flex-col items-start gap-6">
             <p className="text-2xl md:text-3xl font-semibold tracking-tight max-w-xl">
               Bientôt nos premières réalisations.
             </p>
@@ -437,7 +499,7 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="w-full px-6 md:px-16 max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-16 text-center">
+        <h2 className="reveal text-4xl md:text-6xl font-semibold tracking-tight mb-16 text-center">
           FAQ
         </h2>
 
