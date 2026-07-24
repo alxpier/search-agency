@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 const menuItems = [
@@ -41,31 +42,40 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 px-10 py-6 flex justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5">
-        <Link href="/" className="text-[10px] tracking-[0.2em] uppercase font-bold">
-          Kobi Engine
+      <nav className="fixed top-0 w-full z-50 px-10 py-8 flex justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5">
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/kobi-logo.png"
+            alt="Kobi Engine"
+            width={40}
+            height={40}
+            className="rounded-full object-cover border border-white/10"
+          />
+          <span className="text-sm tracking-[0.15em] uppercase font-bold">
+            Kobi Engine
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex gap-10 items-center">
+        <div className="hidden md:flex gap-12 items-center">
           {menuItems.map((item) => (
             <div key={item.title} className="relative group">
-              <Link 
+              <Link
                 href={item.href}
-                className="text-[10px] tracking-[0.2em] uppercase opacity-40 group-hover:opacity-100 transition-opacity flex items-center gap-1"
+                className="text-xs tracking-[0.2em] uppercase opacity-40 group-hover:opacity-100 transition-opacity flex items-center gap-1.5"
               >
                 {item.title}
-                {item.submenu && <ChevronDown size={10} />}
+                {item.submenu && <ChevronDown size={12} />}
               </Link>
 
               {item.submenu && (
-                <div className="absolute top-full right-0 pt-4 hidden group-hover:block w-48">
-                  <div className="bg-[#0a0a0a] border border-white/10 p-4 flex flex-col gap-4">
+                <div className="absolute top-full right-0 pt-4 hidden group-hover:block w-56">
+                  <div className="bg-[#0a0a0a] border border-white/10 p-5 flex flex-col gap-5">
                     {item.submenu.map((sub) => (
-                      <Link 
-                        key={sub.title} 
+                      <Link
+                        key={sub.title}
                         href={sub.href}
-                        className="text-[9px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity"
+                        className="text-[11px] tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity"
                       >
                         {sub.title}
                       </Link>
@@ -83,7 +93,7 @@ export default function Navigation() {
           className="md:hidden p-2 -m-2 text-white opacity-60 hover:opacity-100 transition-opacity"
           aria-label="Ouvrir le menu"
         >
-          <Menu size={20} />
+          <Menu size={24} />
         </button>
       </nav>
 
@@ -110,7 +120,7 @@ export default function Navigation() {
                     <Link
                       href={item.href}
                       onClick={closeMenu}
-                      className="text-[10px] tracking-[0.2em] uppercase text-white opacity-60 hover:opacity-100 transition-opacity block mb-4"
+                      className="text-xs tracking-[0.2em] uppercase text-white opacity-60 hover:opacity-100 transition-opacity block mb-4"
                     >
                       {item.title}
                     </Link>
@@ -120,7 +130,7 @@ export default function Navigation() {
                           key={sub.title}
                           href={sub.href}
                           onClick={closeMenu}
-                          className="text-[9px] tracking-[0.2em] uppercase text-zinc-500 hover:text-white transition-colors"
+                          className="text-[11px] tracking-[0.2em] uppercase text-zinc-500 hover:text-white transition-colors"
                         >
                           {sub.title}
                         </Link>
@@ -131,7 +141,7 @@ export default function Navigation() {
                   <Link
                     href={item.href}
                     onClick={closeMenu}
-                    className="text-[10px] tracking-[0.2em] uppercase text-white opacity-60 hover:opacity-100 transition-opacity"
+                    className="text-xs tracking-[0.2em] uppercase text-white opacity-60 hover:opacity-100 transition-opacity"
                   >
                     {item.title}
                   </Link>
