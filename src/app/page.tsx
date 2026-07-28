@@ -179,10 +179,10 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-90 brightness-150 contrast-110 saturate-150"
+            className="object-cover opacity-90 brightness-125 contrast-110 saturate-150"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-[#2c1319]/75 to-[#2c1319]/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-[#2c1319]/25" />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative">
@@ -242,12 +242,15 @@ export default function HomePage() {
       </section>
 
       {/* EXPERTISES */}
-      <section className="section-tint-warm w-full px-6 md:px-16">
+      <section className="w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
-          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-20">Expertises Stratégiques</h2>
+          <SectionHeading
+            eyebrow="Expertises Stratégiques"
+            intro="On a fait le choix de ne maîtriser que trois expertises, mais de les maîtriser vraiment : la technique qui fait qu'un site est trouvé, la sémantique qui fait qu'il est compris par les IA génératives, et la fabrication qui fait qu'il tient dans la durée. C'est cette double compétence — comprendre le search et savoir construire — qui nous permet de vous proposer un accompagnement complet, du diagnostic jusqu'à la mise en ligne, sans multiplier les prestataires."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <article className="glow-item glow-seo p-12 flex flex-col gap-8 group relative">
+            <article className="glow-item glow-a p-12 flex flex-col gap-8 group relative">
               <Globe className="group-hover:text-accent-sage transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/seo" className="anchor-stretch">SEO Technique</Link>
@@ -257,7 +260,7 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item glow-geo p-12 flex flex-col gap-8 group relative">
+            <article className="glow-item glow-b p-12 flex flex-col gap-8 group relative">
               <Cpu className="group-hover:text-accent-plum transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/geo" className="anchor-stretch">GEO / IA</Link>
@@ -267,7 +270,7 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item glow-sites p-12 flex flex-col gap-8 group relative">
+            <article className="glow-item glow-c p-12 flex flex-col gap-8 group relative">
               <Layers className="group-hover:text-accent-wine transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/sites-web" className="anchor-stretch">Création de sites</Link>
@@ -283,7 +286,11 @@ export default function HomePage() {
       {/* CHIFFRES CLÉS — bandeau, pas de cards */}
       <section className="section-tint-sage w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
-          <h2 className="border-l-2 border-accent-sage pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
+          <SectionHeading
+            eyebrow="En chiffres"
+            intro="Pas de promesse en l'air : ces chiffres décrivent notre façon de travailler, pas un résultat marketing. Dix ans d'expérience en agence sur des secteurs très différents, un délai qu'on tient, et un cahier des charges qui pose toutes les questions avant de commencer — pour que le chiffrage annoncé soit celui que vous payez."
+            accent="sage"
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
             <StatBanner value={10} suffix=" ans" label="D'expérience agence, tous secteurs confondus" />
             <StatBanner value={4} prefix="< " suffix=" sem." label="Pour livrer votre site" />
@@ -301,12 +308,15 @@ export default function HomePage() {
       {/* SECTEURS */}
       <section className="w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
-          <SectionHeading eyebrow="Secteurs" intro="On accompagne les professionnels qui méritent mieux qu'un template." />
+          <SectionHeading
+            eyebrow="Secteurs"
+            intro="On accompagne les professionnels qui méritent mieux qu'un template. Trois métiers reçoivent aujourd'hui toute notre attention, parce qu'on préfère maîtriser leur vocabulaire et leurs problématiques plutôt que de rester généralistes — mais on garde l'oreille ouverte à d'autres professions qui nous ressemblent."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
-            {secteursPrio.map(({ icon: Icon, title, desc, href }) => (
-              <article key={href} className="glow-item p-12 flex flex-col gap-6 group relative">
-                <Icon className="group-hover:text-sw-yellow transition-colors" size={36} />
+            {secteursPrio.map(({ icon: Icon, title, desc, href }, i) => (
+              <article key={href} className={`glow-item ${["glow-a", "glow-b", "glow-c"][i]} p-12 flex flex-col gap-6 group relative`}>
+                <Icon className={`transition-colors ${["group-hover:text-accent-sage", "group-hover:text-accent-plum", "group-hover:text-accent-wine"][i]}`} size={36} />
                 <h3 className="text-3xl font-semibold tracking-tight">
                   <Link href={href} className="anchor-stretch">{title}</Link>
                 </h3>
@@ -337,7 +347,11 @@ export default function HomePage() {
       {/* NOTRE MÉTHODE */}
       <section className="section-tint-plum w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
-          <SectionHeading eyebrow="Notre méthode" intro="Un process en 3 étapes, sans surprise et sans jargon inutile." accent="plum" />
+          <SectionHeading
+            eyebrow="Notre méthode"
+            intro="Un process en 3 étapes, sans surprise et sans jargon inutile. Chaque projet suit le même cadre, du premier échange à la mise en ligne : comprendre votre métier avant d'écrire la moindre ligne de code, construire une base qu'on personnalise avec vous, puis livrer un site prêt à générer des contacts — pas un chantier à moitié fini."
+            accent="plum"
+          />
 
           {/* Connecteur pipeline (desktop) */}
           <div className="hidden md:flex items-center justify-center mb-4">
@@ -375,12 +389,8 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section className="relative w-full px-6 md:px-16 border-t-2 border-[#c5a059]/40 bg-gradient-to-b from-black to-zinc-900 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 20% 100%, rgba(197,160,89,0.1), transparent 70%)" }}
-        />
-        <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 relative">
+      <section className="w-full px-6 md:px-16 border-t border-white/5">
+        <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
           <div>
             <span className="text-xs tracking-[0.4em] uppercase text-zinc-600 mb-8 block">Démarrer un projet</span>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-none mb-12">
@@ -435,7 +445,7 @@ export default function HomePage() {
 
         <div className="divide-y divide-white/5">
           {faqData.map((item, i) => (
-            <details key={i} className="group" open={i === 0}>
+            <details key={i} className="group" open>
               <summary className="py-8 cursor-pointer text-xl font-semibold flex justify-between items-center list-none">
                 {item.q}
                 <span className="text-sw-yellow group-open:rotate-45 transition-transform text-2xl shrink-0 ml-6">+</span>

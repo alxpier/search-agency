@@ -232,56 +232,52 @@ section {
   transform: translateY(-3px);
 }
 
-/* --- ZONES DE COULEUR PAR SECTION (démarcation franche, pas subtile) --- */
+/* --- ZONES DE COULEUR PAR SECTION --- */
+/* Exactement 3 nuances (charte P1010384) tournent en alternance avec du noir neutre. */
 .section-tint-wine {
-  background: linear-gradient(180deg, #241015 0%, #0c0708 100%);
-  border-top: 2px solid rgba(178, 58, 78, 0.45);
-  border-bottom: 2px solid rgba(178, 58, 78, 0.45);
+  background: linear-gradient(180deg, #2c1319 0%, #0e080a 100%);
+  border-top: 2px solid rgba(178, 58, 78, 0.5);
+  border-bottom: 2px solid rgba(178, 58, 78, 0.5);
 }
 
 .section-tint-sage {
-  background: linear-gradient(180deg, #0f1a15 0%, #0a0b09 100%);
-  border-top: 2px solid rgba(92, 138, 107, 0.45);
-  border-bottom: 2px solid rgba(92, 138, 107, 0.45);
+  background: linear-gradient(180deg, #132018 0%, #0b0d0a 100%);
+  border-top: 2px solid rgba(92, 138, 107, 0.5);
+  border-bottom: 2px solid rgba(92, 138, 107, 0.5);
 }
 
 .section-tint-plum {
-  background: linear-gradient(180deg, #1e1020 0%, #0b070c 100%);
-  border-top: 2px solid rgba(160, 82, 126, 0.45);
-  border-bottom: 2px solid rgba(160, 82, 126, 0.45);
+  background: linear-gradient(180deg, #261329 0%, #0d080e 100%);
+  border-top: 2px solid rgba(160, 82, 126, 0.5);
+  border-bottom: 2px solid rgba(160, 82, 126, 0.5);
 }
 
-.section-tint-warm {
-  background: linear-gradient(180deg, #1a1309 0%, #0c0a06 100%);
-  border-top: 2px solid rgba(255, 232, 31, 0.3);
-}
-
-/* --- GLOW COLORÉ PAR EXPERTISE (SEO / GEO / Sites) — charte P1010384 --- */
-.glow-seo:hover,
-.glow-geo:hover,
-.glow-sites:hover {
+/* --- GLOW COLORÉ (rotation sage / plum / wine, même comportement partout) --- */
+.glow-a:hover,
+.glow-b:hover,
+.glow-c:hover {
   transform: translateY(-3px) scale(1.015);
 }
 
-.glow-seo:hover {
-  border-color: rgba(92, 138, 107, 0.55);
+.glow-a:hover {
+  border-color: rgba(92, 138, 107, 0.6);
   box-shadow:
-    inset 0 0 40px rgba(92, 138, 107, 0.18),
-    0 0 35px rgba(92, 138, 107, 0.18);
+    inset 0 0 40px rgba(92, 138, 107, 0.22),
+    0 0 35px rgba(92, 138, 107, 0.22);
 }
 
-.glow-geo:hover {
-  border-color: rgba(160, 82, 126, 0.55);
+.glow-b:hover {
+  border-color: rgba(160, 82, 126, 0.6);
   box-shadow:
-    inset 0 0 40px rgba(160, 82, 126, 0.18),
-    0 0 35px rgba(160, 82, 126, 0.18);
+    inset 0 0 40px rgba(160, 82, 126, 0.22),
+    0 0 35px rgba(160, 82, 126, 0.22);
 }
 
-.glow-sites:hover {
-  border-color: rgba(178, 58, 78, 0.55);
+.glow-c:hover {
+  border-color: rgba(178, 58, 78, 0.6);
   box-shadow:
-    inset 0 0 40px rgba(178, 58, 78, 0.18),
-    0 0 35px rgba(178, 58, 78, 0.18);
+    inset 0 0 40px rgba(178, 58, 78, 0.22),
+    0 0 35px rgba(178, 58, 78, 0.22);
 }
 
 /* --- APPARITION AU SCROLL --- */
