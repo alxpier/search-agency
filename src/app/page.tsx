@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight, Globe, Cpu, Layers, Mail, MapPin,
   History, ClipboardList, ClipboardCheck, Bot, Search, Code, Rocket,
@@ -52,7 +53,7 @@ const faqData = [
   { q: "Travaillez-vous avec tous les secteurs d'activité ?", r: "Nous nous concentrons volontairement sur quelques niches (experts-comptables, architectes, vétérinaires) pour maîtriser leur vocabulaire métier et leurs problématiques spécifiques plutôt que de rester généralistes." }
 ];
 
-function StatCounter({ value, prefix = "", suffix = "", label }: { value: number; prefix?: string; suffix?: string; label: string }) {
+function useCountUp(target: number) {
   const [display, setDisplay] = React.useState(0);
   const ref = React.useRef<HTMLDivElement>(null);
   const started = React.useRef(false);
@@ -71,7 +72,7 @@ function StatCounter({ value, prefix = "", suffix = "", label }: { value: number
         const tick = (now: number) => {
           const progress = Math.min((now - startTime) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          setDisplay(Math.round(value * eased));
+          setDisplay(Math.round(target * eased));
           if (progress < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -81,14 +82,19 @@ function StatCounter({ value, prefix = "", suffix = "", label }: { value: number
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value]);
+  }, [target]);
 
+  return { ref, display };
+}
+
+function StatBanner({ value, prefix = "", suffix = "", label }: { value: number; prefix?: string; suffix?: string; label: string }) {
+  const { ref, display } = useCountUp(value);
   return (
-    <div ref={ref} className="glow-item p-12 flex flex-col items-center gap-4 text-center">
+    <div ref={ref} className="py-10 md:py-4 flex flex-col items-center gap-3 text-center">
       <p className="text-5xl md:text-6xl font-semibold tracking-tighter">
         {prefix}{display}{suffix}
       </p>
-      <p className="text-zinc-500 text-xs uppercase tracking-[0.3em]">{label}</p>
+      <p className="text-zinc-400 text-xs uppercase tracking-[0.3em] max-w-[220px]">{label}</p>
     </div>
   );
 }
@@ -166,10 +172,18 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="relative w-full px-6 md:px-16 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 15% 20%, rgba(255,232,31,0.06), transparent 60%), radial-gradient(ellipse 50% 40% at 85% 80%, rgba(160,82,126,0.07), transparent 65%)" }}
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/kobi-leaves.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-90 brightness-150 contrast-110 saturate-150"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+        </div>
 
         <div className="max-w-[1400px] mx-auto relative">
           <h1
@@ -197,44 +211,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* LE CONSTAT */}
-      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950 via-zinc-900/50 to-black overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 70% 60% at 25% 15%, rgba(178,58,78,0.09), transparent 65%)" }}
-        />
-        <div className="reveal max-w-[1400px] mx-auto relative">
-          <SectionHeading
-            eyebrow="Le constat"
-            intro="Trois raisons pour lesquelles la majorité des sites de professionnels ne rapportent rien en 2026."
-            accent="wine"
-          />
+      {/* LE CONSTAT — layout éditorial, pas des cards */}
+      <section className="section-tint-wine relative w-full px-6 md:px-16">
+        <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-16">
+          <div>
+            <h2 className="border-l-2 border-accent-wine pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8">Le constat</h2>
+            <p className="text-2xl md:text-4xl font-semibold tracking-tight leading-snug text-white mb-6">
+              La majorité des sites de professionnels ne rapportent rien en 2026.
+            </p>
+            <p className="text-zinc-400 font-light leading-relaxed max-w-md">
+              Voici pourquoi — et ce qu&apos;on fait différemment chez Kobi Engine.
+            </p>
+          </div>
 
-          <div className="relative">
-            <div className="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/10 to-white/0" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {constat.map(({ icon: Icon, title, desc }, i) => (
-                <article
-                  key={title}
-                  className={`glow-item p-12 flex flex-col gap-6 group relative overflow-hidden ${i === 1 ? "md:translate-y-10" : ""}`}
-                >
-                  <span className="absolute top-1 left-4 text-8xl font-bold text-white/[0.06] select-none pointer-events-none leading-none">
-                    0{i + 1}
-                  </span>
-                  <div className="relative z-10 flex flex-col gap-6">
-                    <Icon className="group-hover:text-accent-wine transition-colors" size={28} />
-                    <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
-                    <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+          <div className="divide-y divide-white/10">
+            {constat.map(({ icon: Icon, title, desc }, i) => (
+              <div key={title} className="py-8 first:pt-0 flex gap-6 group">
+                <span className="text-3xl font-semibold text-accent-wine/40 shrink-0 w-12 tabular-nums">0{i + 1}</span>
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon size={20} className="text-accent-wine shrink-0" />
+                    <h3 className="text-xl font-semibold tracking-tight">{title}</h3>
                   </div>
-                </article>
-              ))}
-            </div>
+                  <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* EXPERTISES */}
-      <section className="w-full px-6 md:px-16">
+      <section className="section-tint-warm w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
           <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-20">Expertises Stratégiques</h2>
 
@@ -272,24 +280,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CHIFFRES CLÉS */}
-      <section className="relative w-full px-6 md:px-16 bg-gradient-to-r from-zinc-950/30 via-zinc-900/50 to-zinc-950/30 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 70% 60% at 75% 30%, rgba(92,138,107,0.08), transparent 65%)" }}
-        />
-        <div className="reveal max-w-[1400px] mx-auto relative">
+      {/* CHIFFRES CLÉS — bandeau, pas de cards */}
+      <section className="section-tint-sage w-full px-6 md:px-16">
+        <div className="reveal max-w-[1400px] mx-auto">
           <h2 className="border-l-2 border-accent-sage pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <StatCounter value={10} suffix=" ans" label="D'expérience agence, tous secteurs confondus" />
-            <StatCounter value={4} prefix="< " suffix=" sem." label="Pour livrer votre site" />
-            <article className="glow-item p-12 flex flex-col items-center gap-4 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <StatBanner value={10} suffix=" ans" label="D'expérience agence, tous secteurs confondus" />
+            <StatBanner value={4} prefix="< " suffix=" sem." label="Pour livrer votre site" />
+            <div className="py-10 md:py-4 flex flex-col items-center gap-3 text-center">
               <ClipboardCheck className="text-accent-sage" size={32} />
               <p className="text-2xl font-semibold tracking-tight">Un CDC qui cadre tout</p>
-              <p className="text-zinc-500 text-sm font-light leading-relaxed">
+              <p className="text-zinc-400 text-sm font-light leading-relaxed max-w-[260px]">
                 Un cahier des charges rempli ensemble, un chiffrage transparent — pas d&apos;appel d&apos;un commercial non sollicité.
               </p>
-            </article>
+            </div>
           </div>
         </div>
       </section>
@@ -331,12 +335,8 @@ export default function HomePage() {
       </section>
 
       {/* NOTRE MÉTHODE */}
-      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950/70 to-black overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 70% 60% at 25% 30%, rgba(160,82,126,0.08), transparent 65%)" }}
-        />
-        <div className="reveal max-w-[1400px] mx-auto relative">
+      <section className="section-tint-plum w-full px-6 md:px-16">
+        <div className="reveal max-w-[1400px] mx-auto">
           <SectionHeading eyebrow="Notre méthode" intro="Un process en 3 étapes, sans surprise et sans jargon inutile." accent="plum" />
 
           {/* Connecteur pipeline (desktop) */}
@@ -375,10 +375,10 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section className="relative w-full px-6 md:px-16 border-t border-white/5 bg-gradient-to-b from-black to-zinc-900 overflow-hidden">
+      <section className="relative w-full px-6 md:px-16 border-t-2 border-[#c5a059]/40 bg-gradient-to-b from-black to-zinc-900 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 20% 100%, rgba(197,160,89,0.08), transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse 60% 50% at 20% 100%, rgba(197,160,89,0.1), transparent 70%)" }}
         />
         <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 relative">
           <div>
@@ -435,10 +435,10 @@ export default function HomePage() {
 
         <div className="divide-y divide-white/5">
           {faqData.map((item, i) => (
-            <details key={i} className="group">
+            <details key={i} className="group" open={i === 0}>
               <summary className="py-8 cursor-pointer text-xl font-semibold flex justify-between items-center list-none">
                 {item.q}
-                <span className="text-sw-yellow group-open:rotate-45 transition-transform text-2xl">+</span>
+                <span className="text-sw-yellow group-open:rotate-45 transition-transform text-2xl shrink-0 ml-6">+</span>
               </summary>
               <div className="pb-8 text-zinc-400 font-light text-lg leading-relaxed max-w-3xl">
                 {item.r}
