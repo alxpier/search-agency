@@ -232,6 +232,11 @@ section {
   transform: translateY(-3px);
 }
 
+/* --- SURFACE ÉLEVÉE (séparation par palier de gris neutre, pas par couleur) --- */
+.section-surface {
+  background-color: #0c0c0e;
+}
+
 /* --- GLOW COLORÉ (rotation sage / plum / wine, même comportement partout) --- */
 .glow-a:hover,
 .glow-b:hover,
