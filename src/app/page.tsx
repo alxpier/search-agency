@@ -179,10 +179,12 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-90 brightness-125 contrast-110 saturate-150"
+            className="object-cover grayscale contrast-125 brightness-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-[#2c1319]/75 to-[#2c1319]/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-[#2c1319]/25" />
+          {/* Duotone : la photo n'a plus que la teinte bordeaux, aucune autre couleur ne peut passer */}
+          <div className="absolute inset-0 bg-accent-wine mix-blend-color" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/25" />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative">
@@ -212,7 +214,7 @@ export default function HomePage() {
       </section>
 
       {/* LE CONSTAT — layout éditorial, pas des cards */}
-      <section className="section-tint-wine relative w-full px-6 md:px-16">
+      <section className="relative w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-16">
           <div>
             <h2 className="border-l-2 border-accent-wine pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8">Le constat</h2>
@@ -284,7 +286,7 @@ export default function HomePage() {
       </section>
 
       {/* CHIFFRES CLÉS — bandeau, pas de cards */}
-      <section className="section-tint-sage w-full px-6 md:px-16">
+      <section className="w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
           <SectionHeading
             eyebrow="En chiffres"
@@ -345,7 +347,7 @@ export default function HomePage() {
       </section>
 
       {/* NOTRE MÉTHODE */}
-      <section className="section-tint-plum w-full px-6 md:px-16">
+      <section className="w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto">
           <SectionHeading
             eyebrow="Notre méthode"

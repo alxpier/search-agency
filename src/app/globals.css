@@ -232,26 +232,6 @@ section {
   transform: translateY(-3px);
 }
 
-/* --- ZONES DE COULEUR PAR SECTION --- */
-/* Exactement 3 nuances (charte P1010384) tournent en alternance avec du noir neutre. */
-.section-tint-wine {
-  background: linear-gradient(180deg, #2c1319 0%, #0e080a 100%);
-  border-top: 2px solid rgba(178, 58, 78, 0.5);
-  border-bottom: 2px solid rgba(178, 58, 78, 0.5);
-}
-
-.section-tint-sage {
-  background: linear-gradient(180deg, #132018 0%, #0b0d0a 100%);
-  border-top: 2px solid rgba(92, 138, 107, 0.5);
-  border-bottom: 2px solid rgba(92, 138, 107, 0.5);
-}
-
-.section-tint-plum {
-  background: linear-gradient(180deg, #261329 0%, #0d080e 100%);
-  border-top: 2px solid rgba(160, 82, 126, 0.5);
-  border-bottom: 2px solid rgba(160, 82, 126, 0.5);
-}
-
 /* --- GLOW COLORÉ (rotation sage / plum / wine, même comportement partout) --- */
 .glow-a:hover,
 .glow-b:hover,
