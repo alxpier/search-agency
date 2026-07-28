@@ -9,6 +9,10 @@
 
 @theme {
   --color-sw-yellow: #FFE81F;
+  /* Charte dérivée de la photo P1010384 (feuilles pourpres) */
+  --color-accent-wine: #B23A4E;
+  --color-accent-plum: #A0527E;
+  --color-accent-sage: #5C8A6B;
 }
 
 :root {
@@ -163,12 +167,6 @@ section {
   transform: scale(1.015);
 }
 
-/* --- PORTRAIT KOBI (fondu radial dans le fond noir) --- */
-.kobi-portrait {
-  -webkit-mask-image: radial-gradient(circle at center, black 58%, transparent 78%);
-  mask-image: radial-gradient(circle at center, black 58%, transparent 78%);
-}
-
 /* --- STRETCHED LINK --- */
 .anchor-stretch::after {
   content: "";
@@ -234,7 +232,7 @@ section {
   transform: translateY(-3px);
 }
 
-/* --- GLOW COLORÉ PAR EXPERTISE (SEO / GEO / Sites) --- */
+/* --- GLOW COLORÉ PAR EXPERTISE (SEO / GEO / Sites) — charte P1010384 --- */
 .glow-seo:hover,
 .glow-geo:hover,
 .glow-sites:hover {
@@ -242,65 +240,24 @@ section {
 }
 
 .glow-seo:hover {
-  border-color: rgba(16, 185, 129, 0.5);
+  border-color: rgba(92, 138, 107, 0.55);
   box-shadow:
-    inset 0 0 40px rgba(16, 185, 129, 0.18),
-    0 0 35px rgba(16, 185, 129, 0.18);
+    inset 0 0 40px rgba(92, 138, 107, 0.18),
+    0 0 35px rgba(92, 138, 107, 0.18);
 }
 
 .glow-geo:hover {
-  border-color: rgba(59, 130, 246, 0.5);
+  border-color: rgba(160, 82, 126, 0.55);
   box-shadow:
-    inset 0 0 40px rgba(59, 130, 246, 0.18),
-    0 0 35px rgba(59, 130, 246, 0.18);
+    inset 0 0 40px rgba(160, 82, 126, 0.18),
+    0 0 35px rgba(160, 82, 126, 0.18);
 }
 
 .glow-sites:hover {
-  border-color: rgba(249, 115, 22, 0.5);
+  border-color: rgba(178, 58, 78, 0.55);
   box-shadow:
-    inset 0 0 40px rgba(249, 115, 22, 0.18),
-    0 0 35px rgba(249, 115, 22, 0.18);
-}
-
-/* --- HALO ORGANIQUE (Kobi) --- */
-.kobi-halo {
-  position: absolute;
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  filter: blur(70px);
-  pointer-events: none;
-  animation: kobi-breathe 9s ease-in-out infinite;
-}
-
-@keyframes kobi-breathe {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.55; }
-  50% { transform: scale(1.1) rotate(8deg); opacity: 0.85; }
-}
-
-/* --- CHAMP D'ÉTOILES (Hero) --- */
-.star-field {
-  position: absolute;
-  pointer-events: none;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 80% 60%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 60% 15%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 90% 25%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 45% 45%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 15% 55%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 70% 90%, rgba(255, 255, 255, 0.4), transparent);
-  animation: star-twinkle 7s ease-in-out infinite;
-}
-
-@keyframes star-twinkle {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.85; }
-}
-
-/* --- MOTIF POINTILLÉ (placeholder Réalisations) --- */
-.pattern-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 22px 22px;
+    inset 0 0 40px rgba(178, 58, 78, 0.18),
+    0 0 35px rgba(178, 58, 78, 0.18);
 }
 
 /* --- APPARITION AU SCROLL --- */
@@ -320,10 +277,6 @@ section {
     opacity: 1;
     transform: none;
     transition: none;
-  }
-  .kobi-halo,
-  .star-field {
-    animation: none;
   }
 }
 

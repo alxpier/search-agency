@@ -1,56 +1,28 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight, Globe, Cpu, Layers, Mail, MapPin,
-  EyeOff, Copy, Bot, Search, Code, Rocket,
+  History, ClipboardList, ClipboardCheck, Bot, Search, Code, Rocket,
   Calculator, Building2, PawPrint,
 } from "lucide-react";
 
-const labArticles = [
-  {
-    title: "Structurer son site pour le GEO : bonnes pratiques et pièges à éviter",
-    category: "GEO",
-    date: "2024-05-20",
-    href: "/blog/structurer-site-geo",
-  },
-  {
-    title: "Mesurer l’impact SEO avec la Data : du crawl au dashboard",
-    category: "Data",
-    date: "2024-04-18",
-    href: "/blog/mesurer-impact-seo-data",
-  },
-  {
-    title: "Optimisation technique avancée : indexabilité et budget crawl",
-    category: "Technique",
-    date: "2024-03-27",
-    href: "/blog/optimisation-technique-indexabilite",
-  },
-];
-
 const constat = [
   {
-    icon: EyeOff,
-    title: "Un site vitrine ne suffit plus",
-    desc: "En 2026, la majorité des sites de professionnels sont invisibles sur Google. Beau design, zéro visite : aucun prospect ne les trouve jamais.",
+    icon: History,
+    title: "Des sites obsolètes depuis des années",
+    desc: "Beaucoup de sites tournent depuis des années, avec peu de mises à jour et peu de leads : les faire évoluer est complexe, car ils reposent sur d'anciennes pratiques techniques qui demandaient énormément de développement manuel. On mise sur l'IA pour accélérer et fiabiliser ce travail.",
   },
   {
-    icon: Copy,
-    title: "Les templates génériques se ressemblent tous",
-    desc: "Simplébo, Bakipy, Wix... Google voit la même structure sur des milliers de sites. Impossible de se différencier ou d'être identifié comme une référence.",
+    icon: ClipboardList,
+    title: "Pas de template, une base qu'on personnalise",
+    desc: "On ne part pas d'un template générique : on part d'une base fonctionnelle qu'on adapte et personnalise avec vous, à partir d'un brief que vous remplissez avec toutes vos exigences et vos besoins.",
   },
   {
     icon: Bot,
     title: "Le GEO change la donne",
-    desc: "Vos clients ne tapent plus une recherche, ils posent une question à ChatGPT ou Perplexity. Sans architecture sémantique adaptée, vous êtes absent de la réponse.",
+    desc: "Le SEO était déjà complexe : l'IA générative ajoute une couche de difficulté si votre site est déjà peu visible. Il faut être précis pour être la réponse retenue lors de la requête d'un utilisateur.",
   },
-];
-
-const stats = [
-  { value: 10, suffix: "+", label: "Métiers accompagnés" },
-  { value: 100, suffix: "/100", label: "Score Core Web Vitals visé" },
-  { value: 4, prefix: "< ", suffix: " sem.", label: "Délai de livraison moyen" },
 ];
 
 const secteursPrio = [
@@ -81,9 +53,9 @@ const faqData = [
 ];
 
 function StatCounter({ value, prefix = "", suffix = "", label }: { value: number; prefix?: string; suffix?: string; label: string }) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const started = useRef(false);
+  const [display, setDisplay] = React.useState(0);
+  const ref = React.useRef<HTMLDivElement>(null);
+  const started = React.useRef(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -121,18 +93,23 @@ function StatCounter({ value, prefix = "", suffix = "", label }: { value: number
   );
 }
 
-function SectionHeading({ eyebrow, intro }: { eyebrow: string; intro?: string }) {
+const accentBorder = {
+  yellow: "border-sw-yellow",
+  wine: "border-accent-wine",
+  plum: "border-accent-plum",
+  sage: "border-accent-sage",
+};
+
+function SectionHeading({ eyebrow, intro, accent = "yellow" }: { eyebrow: string; intro?: string; accent?: keyof typeof accentBorder }) {
   return (
     <div className="mb-16">
-      <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">{eyebrow}</h2>
+      <h2 className={`border-l-2 ${accentBorder[accent]} pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4`}>{eyebrow}</h2>
       {intro && <p className="text-zinc-400 text-lg md:text-xl font-light max-w-2xl">{intro}</p>}
     </div>
   );
 }
 
 export default function HomePage() {
-  const kobiRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const handleScroll = () => {
       const items = document.querySelectorAll(".glow-item");
@@ -145,11 +122,6 @@ export default function HomePage() {
         const rotation = scrolled * 0.15;
         (item as HTMLElement).style.setProperty("--laser-pos", `${rotation}deg`);
       });
-
-      if (kobiRef.current) {
-        const parallax = Math.min(scrolled * 0.08, 60);
-        kobiRef.current.style.transform = `translateY(${parallax}px)`;
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -196,58 +168,47 @@ export default function HomePage() {
       <section className="relative w-full px-6 md:px-16 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 70% 60% at 78% 35%, rgba(255,232,31,0.07), transparent 65%)" }}
+          style={{ background: "radial-gradient(ellipse 60% 50% at 15% 20%, rgba(255,232,31,0.06), transparent 60%), radial-gradient(ellipse 50% 40% at 85% 80%, rgba(160,82,126,0.07), transparent 65%)" }}
         />
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center relative">
-          <div>
-            <h1
-              className="h1-tatooine mb-16 text-left"
-              data-text="Le site qui vous amène des clients"
-            >
-              Le site qui vous amène des clients
-            </h1>
+        <div className="max-w-[1400px] mx-auto relative">
+          <h1
+            className="h1-tatooine mb-16 text-left"
+            data-text="Le site qui vous amène des clients"
+          >
+            Le site qui vous amène des clients
+          </h1>
 
-            <div className="text-zinc-300 text-base md:text-xl leading-relaxed font-light space-y-8 mb-12">
-              <p>
-                Kobi Engine conçoit des sites sur-mesure pour les experts-comptables, architectes et vétérinaires : pas de template générique, pas de structure interchangeable. Chaque site est pensé pour votre métier, votre vocabulaire et vos clients.
-              </p>
-              <p>
-                En 2026, le SEO opère une mutation stratégique et devient le <span className="text-white font-medium">GEO (Generative Engine Optimization)</span>. L’enjeu n’est plus d’occuper une place dans les résultats Google, mais de devenir une source de référence citée par les moteurs d’IA tels que Perplexity, Gemini, ou les AI Overviews.
-              </p>
-              <p>
-                À Lyon et à distance, on fait du Search/GEO un actif stratégique, pilotable et documenté, pour des cabinets qui n&apos;ont pas de temps à perdre avec le marketing.
-              </p>
-            </div>
-
-            <Link href="/methode" className="sw-link text-xl md:text-2xl font-semibold tracking-wide">
-              Découvrir notre méthode &rarr;
-            </Link>
+          <div className="text-zinc-300 text-base md:text-xl leading-relaxed font-light space-y-8 mb-12 max-w-3xl">
+            <p>
+              Que vous soyez expert-comptable, architecte ou vétérinaire, votre activité est votre force : on vous propose une structure de site idéale pour votre secteur, qu&apos;on personnalise ensuite selon votre activité précise et votre offre. Envie de vous projeter ?{" "}
+              <Link href="/secteurs" className="text-white underline decoration-white/30 underline-offset-4 hover:text-sw-yellow hover:decoration-sw-yellow transition-colors">
+                Consultez nos exemples de site par secteur
+              </Link>.
+            </p>
+            <p>
+              L&apos;autre force, c&apos;est le référencement : nos sites sont pensés pour être visibles aussi bien sur <span className="text-white font-medium">Google et Maps</span> que sur <span className="text-white font-medium">ChatGPT, Perplexity ou Gemini</span>. Toutes les bonnes pratiques techniques et éditoriales sont mises en œuvre dès la conception — et vous gardez ensuite la main pour faire évoluer votre site : actualités, pages conseils, nouvelles offres.
+            </p>
           </div>
 
-          <div ref={kobiRef} className="relative flex justify-center lg:justify-end">
-            <div className="star-field inset-[-40px] w-[calc(100%+80px)] h-[calc(100%+80px)]" />
-            <div className="kobi-halo w-[260px] h-[260px] md:w-[340px] md:h-[340px] bg-sw-yellow/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-            <div
-              className="kobi-halo w-[180px] h-[220px] md:w-[240px] md:h-[280px] bg-[#c5a059]/15 top-[35%] left-[60%] -translate-x-1/2 -translate-y-1/2"
-              style={{ animationDelay: "-3s" }}
-            />
-            <Image
-              src="/kobi-hero.png"
-              alt="Kobi, la mascotte de Kobi Engine"
-              width={800}
-              height={800}
-              priority
-              className="kobi-portrait relative w-[280px] md:w-[380px] lg:w-[440px] h-auto"
-            />
-          </div>
+          <Link href="/methode" className="sw-link text-xl md:text-2xl font-semibold tracking-wide">
+            Découvrir notre méthode &rarr;
+          </Link>
         </div>
       </section>
 
       {/* LE CONSTAT */}
-      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950 via-zinc-900/50 to-black">
-        <div className="reveal max-w-[1400px] mx-auto">
-          <SectionHeading eyebrow="Le constat" intro="Trois raisons pour lesquelles la majorité des sites de professionnels ne rapportent rien en 2026." />
+      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950 via-zinc-900/50 to-black overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 60% at 25% 15%, rgba(178,58,78,0.09), transparent 65%)" }}
+        />
+        <div className="reveal max-w-[1400px] mx-auto relative">
+          <SectionHeading
+            eyebrow="Le constat"
+            intro="Trois raisons pour lesquelles la majorité des sites de professionnels ne rapportent rien en 2026."
+            accent="wine"
+          />
 
           <div className="relative">
             <div className="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white/0 via-white/10 to-white/0" />
@@ -261,7 +222,7 @@ export default function HomePage() {
                     0{i + 1}
                   </span>
                   <div className="relative z-10 flex flex-col gap-6">
-                    <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
+                    <Icon className="group-hover:text-accent-wine transition-colors" size={28} />
                     <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
                     <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
                   </div>
@@ -279,7 +240,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <article className="glow-item glow-seo p-12 flex flex-col gap-8 group relative">
-              <Globe className="group-hover:text-emerald-400 transition-colors" size={40} />
+              <Globe className="group-hover:text-accent-sage transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/seo" className="anchor-stretch">SEO Technique</Link>
               </h3>
@@ -289,7 +250,7 @@ export default function HomePage() {
             </article>
 
             <article className="glow-item glow-geo p-12 flex flex-col gap-8 group relative">
-              <Cpu className="group-hover:text-blue-400 transition-colors" size={40} />
+              <Cpu className="group-hover:text-accent-plum transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/geo" className="anchor-stretch">GEO / IA</Link>
               </h3>
@@ -299,7 +260,7 @@ export default function HomePage() {
             </article>
 
             <article className="glow-item glow-sites p-12 flex flex-col gap-8 group relative">
-              <Layers className="group-hover:text-orange-400 transition-colors" size={40} />
+              <Layers className="group-hover:text-accent-wine transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/sites-web" className="anchor-stretch">Création de sites</Link>
               </h3>
@@ -312,13 +273,23 @@ export default function HomePage() {
       </section>
 
       {/* CHIFFRES CLÉS */}
-      <section className="w-full px-6 md:px-16 bg-gradient-to-r from-zinc-950/30 via-zinc-900/50 to-zinc-950/30">
-        <div className="reveal max-w-[1400px] mx-auto">
-          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
+      <section className="relative w-full px-6 md:px-16 bg-gradient-to-r from-zinc-950/30 via-zinc-900/50 to-zinc-950/30 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 60% at 75% 30%, rgba(92,138,107,0.08), transparent 65%)" }}
+        />
+        <div className="reveal max-w-[1400px] mx-auto relative">
+          <h2 className="border-l-2 border-accent-sage pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">En chiffres</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {stats.map((s) => (
-              <StatCounter key={s.label} {...s} />
-            ))}
+            <StatCounter value={10} suffix=" ans" label="D'expérience agence, tous secteurs confondus" />
+            <StatCounter value={4} prefix="< " suffix=" sem." label="Pour livrer votre site" />
+            <article className="glow-item p-12 flex flex-col items-center gap-4 text-center">
+              <ClipboardCheck className="text-accent-sage" size={32} />
+              <p className="text-2xl font-semibold tracking-tight">Un CDC qui cadre tout</p>
+              <p className="text-zinc-500 text-sm font-light leading-relaxed">
+                Un cahier des charges rempli ensemble, un chiffrage transparent — pas d&apos;appel d&apos;un commercial non sollicité.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -360,9 +331,13 @@ export default function HomePage() {
       </section>
 
       {/* NOTRE MÉTHODE */}
-      <section className="w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950/70 to-black">
-        <div className="reveal max-w-[1400px] mx-auto">
-          <SectionHeading eyebrow="Notre méthode" intro="Un process en 3 étapes, sans surprise et sans jargon inutile." />
+      <section className="relative w-full px-6 md:px-16 bg-gradient-to-b from-zinc-950/70 to-black overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 60% at 25% 30%, rgba(160,82,126,0.08), transparent 65%)" }}
+        />
+        <div className="reveal max-w-[1400px] mx-auto relative">
+          <SectionHeading eyebrow="Notre méthode" intro="Un process en 3 étapes, sans surprise et sans jargon inutile." accent="plum" />
 
           {/* Connecteur pipeline (desktop) */}
           <div className="hidden md:flex items-center justify-center mb-4">
@@ -385,7 +360,7 @@ export default function HomePage() {
                   0{i + 1}
                 </span>
                 <div className="relative z-10 flex flex-col gap-6">
-                  <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
+                  <Icon className="group-hover:text-accent-plum transition-colors" size={28} />
                   <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
                   <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
                 </div>
@@ -395,33 +370,6 @@ export default function HomePage() {
 
           <Link href="/methode" className="sw-link text-lg md:text-2xl font-semibold tracking-wide">
             Découvrir notre méthode en détail &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* BLOG / LAB */}
-      <section className="w-full px-6 md:px-16">
-        <div className="reveal max-w-[1400px] mx-auto">
-          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Blog / Lab</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {labArticles.map((article) => (
-              <article key={article.href} className="glow-item group flex flex-col justify-between p-8 min-h-[280px] relative">
-                <div>
-                  <span className="text-xs uppercase text-sw-yellow font-bold tracking-[0.2em] mb-4 block">
-                    {article.category}
-                  </span>
-                  <h3 className="text-2xl font-semibold leading-tight tracking-tight">
-                    <Link href={article.href} className="anchor-stretch">{article.title}</Link>
-                  </h3>
-                </div>
-                <time dateTime={article.date} className="text-zinc-600 text-sm font-medium">{article.date}</time>
-              </article>
-            ))}
-          </div>
-
-          <Link href="/lab" className="sw-link text-lg md:text-2xl font-semibold tracking-wide">
-            Explorer le blog &rarr;
           </Link>
         </div>
       </section>
@@ -475,24 +423,6 @@ export default function HomePage() {
                 <ArrowRight size={28} className="shrink-0 transition-transform group-hover/btn:translate-x-2" />
               </button>
             </form>
-          </div>
-        </div>
-      </section>
-
-      {/* PREUVE SOCIALE */}
-      <section className="w-full px-6 md:px-16 bg-black">
-        <div className="reveal max-w-[1400px] mx-auto">
-          <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-16">Réalisations</h2>
-          <div className="pattern-dots glow-item p-16 md:p-24 flex flex-col items-start gap-6">
-            <p className="text-2xl md:text-3xl font-semibold tracking-tight max-w-xl">
-              Bientôt nos premières réalisations.
-            </p>
-            <p className="text-zinc-400 text-lg font-light leading-relaxed max-w-xl">
-              Kobi Engine démarre. Plutôt que d&apos;afficher des références génériques, on préfère attendre d&apos;avoir de vrais résultats à montrer — les vôtres, peut-être.
-            </p>
-            <Link href="/contact" className="sw-link text-lg md:text-xl font-semibold tracking-wide">
-              Devenir notre premier client &rarr;
-            </Link>
           </div>
         </div>
       </section>
