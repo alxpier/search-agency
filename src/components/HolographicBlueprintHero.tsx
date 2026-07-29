@@ -144,9 +144,9 @@ const OVERLAY_HTML = `
     <div style="position: absolute; left: 0; right: 0; height: 220px; background: linear-gradient(180deg, transparent, rgba(255, 232, 31, 0.05), transparent); animation: holoScanDrift 9s linear infinite;"></div>
   </div>
 
-  <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(8, 5, 7, 0.96) 0%, rgba(10, 6, 10, 0.88) 24%, rgba(11, 7, 12, 0.62) 42%, rgba(12, 8, 13, 0.28) 58%, transparent 72%);"></div>
+  <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(6, 4, 5, 0.99) 0%, rgba(7, 4, 7, 0.96) 28%, rgba(8, 5, 8, 0.85) 46%, rgba(9, 6, 9, 0.6) 62%, rgba(9, 6, 9, 0.25) 78%, transparent 92%);"></div>
 
-  <div style="position: absolute; inset: 0; pointer-events: none; background: rgba(6, 4, 6, 0.35);"></div>
+  <div style="position: absolute; inset: 0; pointer-events: none; background: rgba(5, 3, 5, 0.55);"></div>
 
   <div style="position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 220px 90px rgba(10, 6, 10, 0.9), inset 0 0 90px 10px rgba(96, 56, 170, 0.16);"></div>
 `;
