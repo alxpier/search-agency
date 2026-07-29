@@ -418,23 +418,25 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="w-full px-6 md:px-16 max-w-4xl mx-auto">
-        <h2 className="reveal text-4xl md:text-6xl font-semibold tracking-tight mb-16 text-center">
-          FAQ
-        </h2>
+      <section className="section-surface w-full px-6 md:px-16">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="reveal text-4xl md:text-6xl font-semibold tracking-tight mb-16 text-center">
+            FAQ
+          </h2>
 
-        <div className="divide-y divide-white/5">
-          {faqData.map((item, i) => (
-            <details key={i} className="group" open>
-              <summary className="py-8 cursor-pointer text-xl font-semibold flex justify-between items-center list-none">
-                {item.q}
-                <span className="text-sw-yellow group-open:rotate-45 transition-transform text-2xl shrink-0 ml-6">+</span>
-              </summary>
-              <div className="pb-8 text-zinc-400 font-light text-lg leading-relaxed max-w-3xl">
-                {item.r}
-              </div>
-            </details>
-          ))}
+          <div className="divide-y divide-white/5">
+            {faqData.map((item, i) => (
+              <details key={i} className="group" open>
+                <summary className="py-8 cursor-pointer text-xl font-semibold flex justify-between items-center list-none">
+                  {item.q}
+                  <span className="text-sw-yellow group-open:rotate-45 transition-transform text-2xl shrink-0 ml-6">+</span>
+                </summary>
+                <div className="pb-8 text-zinc-400 font-light text-lg leading-relaxed max-w-3xl">
+                  {item.r}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </main>
