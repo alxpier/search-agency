@@ -144,7 +144,9 @@ const OVERLAY_HTML = `
     <div style="position: absolute; left: 0; right: 0; height: 220px; background: linear-gradient(180deg, transparent, rgba(255, 232, 31, 0.05), transparent); animation: holoScanDrift 9s linear infinite;"></div>
   </div>
 
-  <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(10, 6, 8, 0.92) 0%, rgba(12, 7, 12, 0.7) 16%, rgba(13, 8, 14, 0.3) 30%, transparent 40%);"></div>
+  <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(8, 5, 7, 0.96) 0%, rgba(10, 6, 10, 0.88) 24%, rgba(11, 7, 12, 0.62) 42%, rgba(12, 8, 13, 0.28) 58%, transparent 72%);"></div>
+
+  <div style="position: absolute; inset: 0; pointer-events: none; background: rgba(6, 4, 6, 0.35);"></div>
 
   <div style="position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 220px 90px rgba(10, 6, 10, 0.9), inset 0 0 90px 10px rgba(96, 56, 170, 0.16);"></div>
 `;
@@ -152,22 +154,42 @@ const OVERLAY_HTML = `
 const STAGE_W = 2100;
 const STAGE_H = 900;
 
+// Design-space x of the main glowing panel's centre — the one thing that
+// must stay on screen no matter how the crop window gets squeezed.
+const FOCAL_X = 1310;
+
 export default function HolographicBlueprintHero() {
   const boxRef = useRef<HTMLDivElement>(null);
   const dustRef = useRef<HTMLCanvasElement>(null);
   const [scale, setScale] = useState(1);
+  const [offsetX, setOffsetX] = useState(0);
 
-  // Fit the fixed 2100x900 design stage to the box's width (like the source
-  // artifact). On tall/narrow viewports this leaves plain dark background
-  // below the scene instead of stretching it — cover-fit by height instead
-  // would push all the detail (biased right, x>600 in design space) off the
-  // edge of narrow mobile screens.
+  // True cover-fit (like object-fit: cover): scale by whichever axis needs it
+  // more, so the scaled stage always fully covers the box in both directions
+  // — no empty gap, no hard mid-design crop, regardless of how tall the hero
+  // text makes the section at any given width.
+  //
+  // Cover-fit alone re-introduces a different bug on narrow/tall viewports:
+  // with the stage always anchored at left:0, a large height-driven scale
+  // overflows the width so far that everything past x=600 (i.e. all the
+  // interesting content — it's deliberately biased right, to keep the left
+  // dark for text) gets pushed off the right edge. So we also solve for a
+  // horizontal offset that keeps FOCAL_X visible, clamped so we never reveal
+  // empty space on either side (same clamping object-position would apply).
   useEffect(() => {
     const el = boxRef.current;
     if (!el) return;
     const fit = () => {
-      const s = el.clientWidth / STAGE_W;
-      if (s > 0) setScale(s);
+      const cw = el.clientWidth;
+      const ch = el.clientHeight;
+      if (cw <= 0 || ch <= 0) return;
+      const s = Math.max(cw / STAGE_W, ch / STAGE_H);
+      setScale(s);
+
+      const scaledW = STAGE_W * s;
+      const ideal = cw / 2 - FOCAL_X * s;
+      const minLeft = cw - scaledW;
+      setOffsetX(Math.min(0, Math.max(minLeft, ideal)));
     };
     fit();
     const ro = new ResizeObserver(fit);
@@ -229,7 +251,7 @@ export default function HolographicBlueprintHero() {
           left: 0,
           top: 0,
           transformOrigin: "0 0",
-          transform: `scale(${scale})`,
+          transform: `translate(${offsetX}px, 0) scale(${scale})`,
           width: STAGE_W,
           height: STAGE_H,
           overflow: "hidden",
