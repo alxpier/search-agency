@@ -9,10 +9,6 @@
 
 @theme {
   --color-sw-yellow: #FFE81F;
-  /* Charte dérivée de la photo P1010384 (feuilles pourpres) */
-  --color-accent-wine: #B23A4E;
-  --color-accent-plum: #A0527E;
-  --color-accent-sage: #5C8A6B;
 }
 
 :root {
@@ -232,37 +228,14 @@ section {
   transform: translateY(-3px);
 }
 
-/* --- SURFACE ÉLEVÉE (séparation par palier de gris neutre, pas par couleur) --- */
+/* --- SURFACE ÉLEVÉE (séparation par palier, pas par couleur) --- */
+/* Base et surface = même teinte violette (dérivée de la photo), simple variation de clarté. */
+.bg-violet-base {
+  background-color: #170f1a;
+}
+
 .section-surface {
-  background-color: #0c0c0e;
-}
-
-/* --- GLOW COLORÉ (rotation sage / plum / wine, même comportement partout) --- */
-.glow-a:hover,
-.glow-b:hover,
-.glow-c:hover {
-  transform: translateY(-3px) scale(1.015);
-}
-
-.glow-a:hover {
-  border-color: rgba(92, 138, 107, 0.6);
-  box-shadow:
-    inset 0 0 40px rgba(92, 138, 107, 0.22),
-    0 0 35px rgba(92, 138, 107, 0.22);
-}
-
-.glow-b:hover {
-  border-color: rgba(160, 82, 126, 0.6);
-  box-shadow:
-    inset 0 0 40px rgba(160, 82, 126, 0.22),
-    0 0 35px rgba(160, 82, 126, 0.22);
-}
-
-.glow-c:hover {
-  border-color: rgba(178, 58, 78, 0.6);
-  box-shadow:
-    inset 0 0 40px rgba(178, 58, 78, 0.22),
-    0 0 35px rgba(178, 58, 78, 0.22);
+  background-color: #251a2a;
 }
 
 /* --- APPARITION AU SCROLL --- */

@@ -99,17 +99,10 @@ function StatBanner({ value, prefix = "", suffix = "", label }: { value: number;
   );
 }
 
-const accentBorder = {
-  yellow: "border-sw-yellow",
-  wine: "border-accent-wine",
-  plum: "border-accent-plum",
-  sage: "border-accent-sage",
-};
-
-function SectionHeading({ eyebrow, intro, accent = "yellow" }: { eyebrow: string; intro?: string; accent?: keyof typeof accentBorder }) {
+function SectionHeading({ eyebrow, intro }: { eyebrow: string; intro?: string }) {
   return (
     <div className="mb-16">
-      <h2 className={`border-l-2 ${accentBorder[accent]} pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4`}>{eyebrow}</h2>
+      <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-4">{eyebrow}</h2>
       {intro && <p className="text-zinc-400 text-lg md:text-xl font-light max-w-2xl">{intro}</p>}
     </div>
   );
@@ -163,7 +156,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="bg-black text-white min-h-screen overflow-x-hidden selection:bg-yellow-500/30 relative">
+    <main className="bg-violet-base text-white min-h-screen overflow-x-hidden selection:bg-yellow-500/30 relative">
 
       <script
         type="application/ld+json"
@@ -215,7 +208,7 @@ export default function HomePage() {
       <section className="section-surface relative w-full px-6 md:px-16">
         <div className="reveal max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-16">
           <div>
-            <h2 className="border-l-2 border-accent-wine pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8">Le constat</h2>
+            <h2 className="border-l-2 border-sw-yellow pl-4 text-zinc-500 text-xs tracking-[0.4em] uppercase mb-8">Le constat</h2>
             <p className="text-2xl md:text-4xl font-semibold tracking-tight leading-snug text-white mb-6">
               La majorité des sites de professionnels ne rapportent rien en 2026.
             </p>
@@ -227,10 +220,10 @@ export default function HomePage() {
           <div className="divide-y divide-white/10">
             {constat.map(({ icon: Icon, title, desc }, i) => (
               <div key={title} className="py-8 first:pt-0 flex gap-6 group">
-                <span className="text-3xl font-semibold text-accent-wine/40 shrink-0 w-12 tabular-nums">0{i + 1}</span>
+                <span className="text-3xl font-semibold text-zinc-700 shrink-0 w-12 tabular-nums">0{i + 1}</span>
                 <div>
                   <div className="flex items-center gap-3 mb-3">
-                    <Icon size={20} className="text-accent-wine shrink-0" />
+                    <Icon size={20} className="text-zinc-500 group-hover:text-sw-yellow transition-colors shrink-0" />
                     <h3 className="text-xl font-semibold tracking-tight">{title}</h3>
                   </div>
                   <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
@@ -250,8 +243,8 @@ export default function HomePage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <article className="glow-item glow-a p-12 flex flex-col gap-8 group relative">
-              <Globe className="group-hover:text-accent-sage transition-colors" size={40} />
+            <article className="glow-item p-12 flex flex-col gap-8 group relative">
+              <Globe className="group-hover:text-sw-yellow transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/seo" className="anchor-stretch">SEO Technique</Link>
               </h3>
@@ -260,8 +253,8 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item glow-b p-12 flex flex-col gap-8 group relative">
-              <Cpu className="group-hover:text-accent-plum transition-colors" size={40} />
+            <article className="glow-item p-12 flex flex-col gap-8 group relative">
+              <Cpu className="group-hover:text-sw-yellow transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/geo" className="anchor-stretch">GEO / IA</Link>
               </h3>
@@ -270,8 +263,8 @@ export default function HomePage() {
               </p>
             </article>
 
-            <article className="glow-item glow-c p-12 flex flex-col gap-8 group relative">
-              <Layers className="group-hover:text-accent-wine transition-colors" size={40} />
+            <article className="glow-item p-12 flex flex-col gap-8 group relative">
+              <Layers className="group-hover:text-sw-yellow transition-colors" size={40} />
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
                 <Link href="/expertises/sites-web" className="anchor-stretch">Création de sites</Link>
               </h3>
@@ -289,13 +282,12 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="En chiffres"
             intro="Pas de promesse en l'air : ces chiffres décrivent notre façon de travailler, pas un résultat marketing. Dix ans d'expérience en agence sur des secteurs très différents, un délai qu'on tient, et un cahier des charges qui pose toutes les questions avant de commencer — pour que le chiffrage annoncé soit celui que vous payez."
-            accent="sage"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
             <StatBanner value={10} suffix=" ans" label="D'expérience agence, tous secteurs confondus" />
             <StatBanner value={4} prefix="< " suffix=" sem." label="Pour livrer votre site" />
             <div className="py-10 md:py-4 flex flex-col items-center gap-3 text-center">
-              <ClipboardCheck className="text-accent-sage" size={32} />
+              <ClipboardCheck className="text-sw-yellow" size={32} />
               <p className="text-2xl font-semibold tracking-tight">Un CDC qui cadre tout</p>
               <p className="text-zinc-400 text-sm font-light leading-relaxed max-w-[260px]">
                 Un cahier des charges rempli ensemble, un chiffrage transparent — pas d&apos;appel d&apos;un commercial non sollicité.
@@ -314,9 +306,9 @@ export default function HomePage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
-            {secteursPrio.map(({ icon: Icon, title, desc, href }, i) => (
-              <article key={href} className={`glow-item ${["glow-a", "glow-b", "glow-c"][i]} p-12 flex flex-col gap-6 group relative`}>
-                <Icon className={`transition-colors ${["group-hover:text-accent-sage", "group-hover:text-accent-plum", "group-hover:text-accent-wine"][i]}`} size={36} />
+            {secteursPrio.map(({ icon: Icon, title, desc, href }) => (
+              <article key={href} className="glow-item p-12 flex flex-col gap-6 group relative">
+                <Icon className="group-hover:text-sw-yellow transition-colors" size={36} />
                 <h3 className="text-3xl font-semibold tracking-tight">
                   <Link href={href} className="anchor-stretch">{title}</Link>
                 </h3>
@@ -350,7 +342,6 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Notre méthode"
             intro="Un process en 3 étapes, sans surprise et sans jargon inutile. Chaque projet suit le même cadre, du premier échange à la mise en ligne : comprendre votre métier avant d'écrire la moindre ligne de code, construire une base qu'on personnalise avec vous, puis livrer un site prêt à générer des contacts — pas un chantier à moitié fini."
-            accent="plum"
           />
 
           {/* Connecteur pipeline (desktop) */}
@@ -374,7 +365,7 @@ export default function HomePage() {
                   0{i + 1}
                 </span>
                 <div className="relative z-10 flex flex-col gap-6">
-                  <Icon className="group-hover:text-accent-plum transition-colors" size={28} />
+                  <Icon className="group-hover:text-sw-yellow transition-colors" size={28} />
                   <h3 className="text-2xl font-semibold tracking-tight">{title}</h3>
                   <p className="text-zinc-400 font-light leading-relaxed">{desc}</p>
                 </div>
