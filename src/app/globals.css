@@ -258,6 +258,32 @@ section {
   }
 }
 
+/* --- HERO HOLOGRAPHIQUE --- */
+@keyframes holoFlicker {
+  0%, 100% { opacity: .92; }
+  47% { opacity: .86; }
+  52% { opacity: 1; }
+  78% { opacity: .9; }
+}
+
+@keyframes holoPulseGlow {
+  0%, 100% { opacity: .55; }
+  50% { opacity: .95; }
+}
+
+@keyframes holoScanDrift {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="holoFlicker"],
+  [style*="holoPulseGlow"],
+  [style*="holoScanDrift"] {
+    animation: none !important;
+  }
+}
+
 /* --- GRAIN CINÉMATIQUE --- */
 body::before {
   content: "";

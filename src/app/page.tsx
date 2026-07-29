@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import HolographicBlueprintHero from "@/src/components/HolographicBlueprintHero";
 import {
   ArrowRight, Globe, Cpu, Layers, Mail, MapPin,
   History, ClipboardList, ClipboardCheck, Bot, Search, Code, Rocket,
@@ -165,18 +165,7 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="relative w-full px-6 md:px-16 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/kobi-leaves.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover brightness-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-black/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
-        </div>
+        <HolographicBlueprintHero />
 
         <div className="max-w-[1400px] mx-auto relative">
           <h1
